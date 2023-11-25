@@ -1,0 +1,15 @@
+div.App {
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+  overflow-y: scroll;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+}

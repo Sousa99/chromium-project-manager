@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@models/*" : ["./models/*"],
+            "@contexts/*": ["./contexts/*"],
+            "@components/*" : ["./components/*"],
+            "@organisms/*" : ["./organisms/*"],
+            "@molecules/*" : ["./molecules/*"],
+            "@dialogs/*" : ["./dialogs/*"],
+            "@atoms/*" : ["./atoms/*"],
+            "@resources/*" : ["./resources/*"]
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.edit-dialog {
+  width: 100%;
+
+  .MuiDialogTitle-root+.css-ypiqx9-MuiDialogContent-root {
+    padding-top: 20px;
+  }
+
+  .dialog-content {
+    display: flex;
+    width: 60vw;
+    max-width: 100%;
+
+    padding-top: 5px;
+    
+    flex-direction: column;
+    gap: 20px;
+
+    .MuiTextField-root {
+      flex: auto;
+    }
+
+    .Mui-selected {
+      background-color: transparent;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.import-data-dialog {
+  width: 100%;
+
+  .dialog-content {
+    display: flex;
+    width: 60vw;
+
+    justify-content: center;
+
+    .dropzone {
+      width: 100%;
+
+      .upload-button {
+        display: flex;
+        width: 100%;
+        padding: 20px;
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+
+    }
+  }
+}
