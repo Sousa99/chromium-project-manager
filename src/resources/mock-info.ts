@@ -1,7 +1,7 @@
-import { IData } from "@models/data/IData";
+import { IProjectsData } from "@models/data/IData";
 import { ITicketType } from "@models/ticket/ITicketType";
 
-export const mock_info: IData = [
+export const mock_info: IProjectsData = [
     {
         main_project: true,
         code: 'OSANA',

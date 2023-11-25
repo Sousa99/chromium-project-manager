@@ -4,12 +4,12 @@ import ticket from '@resources/checkers/ITicket-ti';
 import ticketLink from '@resources/checkers/ITicketLink-ti';
 import ticketType from '@resources/checkers/ITicketType-ti';
 
-import { IData } from './data/IData';
+import { IProjectsData } from './data/IData';
 
 import {CheckerT, IErrorDetail, createCheckers} from "ts-interface-checker";
 
-const checkers = createCheckers(data, project, ticket, ticketLink, ticketType) as {IData: CheckerT<IData>};
-export const DataChecker = checkers.IData;
+const checkers = createCheckers(data, project, ticket, ticketLink, ticketType) as {IProjectsData: CheckerT<IProjectsData>};
+export const DataChecker = checkers.IProjectsData;
 
 export const getSpecifiedError = (errorDetails: IErrorDetail[]): string => {
   let currentErrorDetail = errorDetails[0];

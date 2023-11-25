@@ -4,7 +4,7 @@
 import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
-export const ITicket = t.iface([], {
+export const ITicketData = t.iface([], {
   "type": "ITicketType",
   "code": "string",
   "name": "string",
@@ -13,7 +13,12 @@ export const ITicket = t.iface([], {
   "links": t.array("ITicketLink"),
 });
 
+export const ITicket = t.iface(["ITicketData"], {
+  "id": "string",
+});
+
 const exportedTypeSuite: t.ITypeSuite = {
+  ITicketData,
   ITicket,
 };
 export default exportedTypeSuite;

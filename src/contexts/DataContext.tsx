@@ -1,28 +1,31 @@
 import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { mock_info } from '@resources/mock-info';
 import { Filter } from './FilterContext';
-import { IData } from '@models/data/IData';
+import { IProjects, IProjectsData } from '@models/data/IData';
 import { IProject } from '@models/project/IProject';
 import { ITicketLink } from '@models/ticket/ITicketLink';
 import { ITicket } from '@models/ticket/ITicket';
 import { DataChecker } from '@models/checker';
+import { convertDataToExport, convertDataToImport } from '@mappers/ExporterImporter';
+
 
 const deepcopy = require('deepcopy');
 
 const DATA_STORAGE_KEY: string = 'projectTicketManagerData';
 
 interface IDataContext {
-  getData: (filter: Filter) => IData,
+  getData: (filter: Filter) => IProjects,
   downloadData: () => void,
-  uploadData: (new_data_info: IData) => void,
+  uploadData: (new_data_info: IProjectsData) => void,
   // Change Projects Info
   removeProject: (project_code: string) => void,
   editProject: (prev_project_code: string, new_project_info: IProject) => void,
-  addProject: (new_project_info: IProject) => void,
+  addProject: (new_project_info: Omit<IProject, "id">) => void,
   removeTicket: (project_code: string, ticket_code: string) => void,
   editTicket: (project_code: string, prev_ticket_code: string, new_ticket_info: ITicket) => void,
-  addTicket: (project_code: string, new_ticket_info: ITicket) => void,
+  addTicket: (project_code: string, new_ticket_info: Omit<ITicket, "id">) => void,
   removeLink: (project_code: string, ticket_code: string, link_url: string) => void,
   editLink: (project_code: string, ticket_code: string, prev_link_url: string, new_link_info: ITicketLink) => void,
   addLink: (project_code: string, ticket_code: string, new_link_info: ITicketLink) => void,
@@ -46,7 +49,7 @@ export const DataContext = React.createContext<IDataContext>({
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [data, setData] = React.useState<IData>([]);
+  const [data, setData] = React.useState<IProjects>(convertDataToImport(mock_info));
   const [loadedFromStorage, setLoadedFromStorage] = React.useState<boolean>(false);
 
   const filter_hidden = (filter: Filter, hidden_attr: boolean) => filter.show_hidden || !hidden_attr;
@@ -71,7 +74,8 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
       
       const projectLoadedData = loadedData[DATA_STORAGE_KEY];
       if (DataChecker.strictTest(projectLoadedData)) {
-        setData(projectLoadedData);
+        const dataParsed = convertDataToImport(projectLoadedData);
+        setData(dataParsed);
         setLoadedFromStorage(true);
       }
 
@@ -87,7 +91,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getDataFiltered = React.useCallback((filter: Filter) => {
     // Respect Hidden
-    let filtered_data: IData = deepcopy(data);
+    let filtered_data: IProjects = deepcopy(data);
     filtered_data = filtered_data.filter((project) => filter_hidden(filter, project.hidden));
     filtered_data.forEach((project) => {
       project.tickets = project.tickets.filter((ticket) => filter_hidden(filter, ticket.hidden));
@@ -102,7 +106,9 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, [data]);
 
   const downloadData = () => {
-    const json = JSON.stringify(data, null, 2);
+    const dataToExport: IProjectsData = convertDataToExport(data);
+
+    const json = JSON.stringify(dataToExport, null, 2);
     const timestamp = new Date().toISOString();
     const filename = `projects-data - ${timestamp}.json`;
 
@@ -117,23 +123,24 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
     URL.revokeObjectURL(url);
   }
 
-  const uploadData = (new_data_info: IData) => {
-    setData(new_data_info);
+  const uploadData = (new_data_info: IProjectsData) => {
+    const new_data = convertDataToImport(new_data_info);
+    setData(new_data);
   }
 
-  const getProjectIndex = (data: IData, project_code: string): [number, IProject] => {
+  const getProjectIndex = (data: IProjects, project_code: string): [number, IProject] => {
     let project_index = data.findIndex((project) => project.code === project_code);
     return [ project_index, data[project_index] ];
   }
 
-  const getTicketIndex = (data: IData, project_index: number, ticket_code: string): [number, ITicket] => {
+  const getTicketIndex = (data: IProjects, project_index: number, ticket_code: string): [number, ITicket] => {
     let project_tickets = data[project_index].tickets;
 
     let ticket_index = project_tickets.findIndex((ticket) => ticket.code === ticket_code);
     return [ ticket_index, project_tickets[ticket_index] ];
   }
 
-  const getLinkIndex = (data: IData, project_index: number, ticket_index: number, link_url: string): [number, ITicketLink] => {
+  const getLinkIndex = (data: IProjects, project_index: number, ticket_index: number, link_url: string): [number, ITicketLink] => {
     let project_tickets = data[project_index].tickets;
     let ticket_links = project_tickets[ticket_index].links;
 
@@ -143,7 +150,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const removeProject = (project_code: string) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index] = getProjectIndex(new_data, project_code);
 
@@ -154,7 +161,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const editProject = (prev_project_code: string, new_project_info: IProject) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index] = getProjectIndex(new_data, prev_project_code);
 
@@ -163,18 +170,19 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
     })
   }
 
-  const addProject = (new_project_info: IProject) => {
+  const addProject = (new_project_info: Omit<IProject, "id">) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
 
-      new_data.push(new_project_info);
+      let new_project: IProject = { id: uuidv4(), ...new_project_info };
+      new_data.push(new_project);
       return new_data;
     })
   }
 
   const removeTicket = (project_code: string, ticket_code: string) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index, project] = getProjectIndex(new_data, project_code);
       let [ticket_index] = getTicketIndex(new_data, project_index, ticket_code);
@@ -186,7 +194,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const editTicket = (project_code: string, prev_ticket_code: string, new_ticket_info: ITicket) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index, project] = getProjectIndex(new_data, project_code);
       let [ticket_index] = getTicketIndex(new_data, project_index, prev_ticket_code);
@@ -196,20 +204,21 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
     })
   }
 
-  const addTicket = (project_code: string, new_ticket_info: ITicket) => {
+  const addTicket = (project_code: string, new_ticket_info: Omit<ITicket, "id">) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [, project] = getProjectIndex(new_data, project_code);
 
-      project.tickets.push(new_ticket_info);
+      let new_ticket: ITicket = { id: uuidv4(), ...new_ticket_info };
+      project.tickets.push(new_ticket);
       return new_data;
     })
   }
 
   const removeLink = (project_code: string, ticket_code: string, link_url: string) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index] = getProjectIndex(new_data, project_code);
       let [ticket_index, ticket] = getTicketIndex(new_data, project_index, ticket_code);
@@ -222,7 +231,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const editLink = (project_code: string, ticket_code: string, prev_link_url: string, new_link_info: ITicketLink) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index] = getProjectIndex(new_data, project_code);
       let [ticket_index, ticket] = getTicketIndex(new_data, project_index, ticket_code);
@@ -235,7 +244,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addLink = (project_code: string, ticket_code: string, new_link_info: ITicketLink) => {
     setData(data => {
-      let new_data: IData = deepcopy(data);
+      let new_data: IProjects = deepcopy(data);
       
       let [project_index] = getProjectIndex(new_data, project_code);
       let [, ticket] = getTicketIndex(new_data, project_index, ticket_code);

@@ -11,7 +11,7 @@ import { ITicketType } from "@models/ticket/ITicketType";
 
 interface IProps {
   open: boolean,
-  onSave: (ticket_info: ITicket) => void,
+  onSave: (ticket_info: Omit<ITicket, "id">) => void,
   onCancel: () => void
 }
 

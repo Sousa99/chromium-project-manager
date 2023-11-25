@@ -58,7 +58,7 @@ export const ProjectItem = (props: IProps): JSX.Element => {
     />
   ];
 
-  const add_ticket_action = (new_ticket_info: ITicket) => {
+  const add_ticket_action = (new_ticket_info: Omit<ITicket, "id">) => {
     setNotification('success', `Link added successfully!`);
     addTicket(project.code, new_ticket_info);
     setDialogOpen(null);

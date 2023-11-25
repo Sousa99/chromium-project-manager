@@ -4,9 +4,12 @@
 import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
-export const IData = t.array("IProject");
+export const IProjects = t.array("IProject");
+
+export const IProjectsData = t.array("IProjectData");
 
 const exportedTypeSuite: t.ITypeSuite = {
-  IData,
+  IProjects,
+  IProjectsData,
 };
 export default exportedTypeSuite;

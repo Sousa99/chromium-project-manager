@@ -12,7 +12,7 @@ import { IProject } from "@models/project/IProject";
 
 interface IProps {
   open: boolean,
-  onSave: (project_info: IProject) => void,
+  onSave: (project_info: Omit<IProject, "id">) => void,
   onCancel: () => void
 }
 
