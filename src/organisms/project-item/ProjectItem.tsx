@@ -35,7 +35,8 @@ export const ProjectItem = (props: IProps): JSX.Element => {
     <div className='children-box'>
       { project.tickets.map((ticket) => (
         <TicketItem
-          key={ticket.code}
+          key={ticket.id}
+          project_id={project.id}
           project_main={project.main_project}
           project_code={project.code}
           ticket={ticket}
@@ -60,20 +61,19 @@ export const ProjectItem = (props: IProps): JSX.Element => {
 
   const add_ticket_action = (new_ticket_info: Omit<ITicket, "id">) => {
     setNotification('success', `Link added successfully!`);
-    addTicket(project.code, new_ticket_info);
+    addTicket(project.id, new_ticket_info);
     setDialogOpen(null);
   }
 
   const edit_project_action = (new_project_info: IProject) => {
     setNotification('success', `Project changed successfully!`);
-    editProject(project.code, new_project_info);
-    console.log(new_project_info);
+    editProject(project.id, new_project_info);
     setDialogOpen(null);
   }
 
   const remove_project_action = () => {
     setNotification('success', `Project removed successfully!`);
-    removeProject(project.code);
+    removeProject(project.id);
     setDialogOpen(null);
   }
       
@@ -85,8 +85,8 @@ export const ProjectItem = (props: IProps): JSX.Element => {
         iconClosed={<FolderIcon/>}
         children={children}
         sub_buttons={sub_buttons}
-        expanded={selection.project_code === project.code}
-        button_function={() => toggleProject(project.code)}
+        expanded={selection.project_id === project.id}
+        button_function={() => toggleProject(project.id)}
       />
       <AddTicketDialog
         open={dialogOpen === ActionButtonEnum.Add}
