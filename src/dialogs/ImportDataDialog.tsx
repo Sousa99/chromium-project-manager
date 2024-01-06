@@ -7,7 +7,7 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle } from "
 
 import './ImportDataDialog.scss';
 import { DataChecker, getSpecifiedError } from "@models/checker";
-import { IData } from "@models/data/IData";
+import { IProjects } from "@models/data/IData";
 
 enum ImportError {
   NotJson,
@@ -16,14 +16,14 @@ enum ImportError {
 }
 
 interface DataLoaded {
-  project_data: IData | null,
+  project_data: IProjects | null,
   error: ImportError | null,
   error_msg: string | null
 }
 
 interface IProps {
   open: boolean,
-  onSave: (new_data_info: IData) => void,
+  onSave: (new_data_info: IProjects) => void,
   onCancel: () => void
 }
 
@@ -72,6 +72,7 @@ export const ImportDataDialog = (props: IProps) => {
         }
 
       } catch (error) {
+        console.error(error);
         setDataLoaded({
           project_data: null,
           error: ImportError.JsonNotParsable,

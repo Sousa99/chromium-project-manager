@@ -19,6 +19,7 @@ import { ITicketLink } from '@models/ticket/ITicketLink';
 import { EditTicketDialog } from '@dialogs/edit-dialog/EditTicketDialog';
 
 interface IProps {
+  project_id: string,
   project_main: boolean,
   project_code: string,
   ticket: ITicket
@@ -26,6 +27,7 @@ interface IProps {
 
 export const TicketItem = (props: IProps): JSX.Element => {
   const {
+    project_id,
     project_main,
     project_code,
     ticket
@@ -42,8 +44,8 @@ export const TicketItem = (props: IProps): JSX.Element => {
       { ticket.links.map((link) => (
         <LinkItem
           key={link.url}
-          project_code={project_code}
-          ticket_code={ticket.code}
+          project_id={project_id}
+          ticket_id={ticket.id}
           link={link}
         />
       ))}
@@ -88,19 +90,19 @@ export const TicketItem = (props: IProps): JSX.Element => {
 
   const add_link_action = (new_link_info: ITicketLink) => {
     setNotification('success', `Link added successfully!`);
-    addLink(project_code, ticket.code, new_link_info);
+    addLink(project_id, ticket.id, new_link_info);
     setDialogOpen(null);
   }
 
   const edit_ticket_action = (new_ticket_info: ITicket) => {
     setNotification('success', `Ticket changed successfully!`);
-    editTicket(project_code, ticket.code, new_ticket_info);
+    editTicket(project_id, ticket.id, new_ticket_info);
     setDialogOpen(null);
   }
 
   const remove_ticket_action = () => {
     setNotification('success', `Ticket removed successfully!`);
-    removeTicket(project_code, ticket.code);
+    removeTicket(project_id, ticket.id);
     setDialogOpen(null);
   }
     
@@ -112,8 +114,8 @@ export const TicketItem = (props: IProps): JSX.Element => {
         iconClosed={<ExpandMoreIcon/>}
         children={children}
         sub_buttons={sub_buttons}
-        expanded={selection.ticket_code === ticket.code}
-        button_function={() => toggleTicket(ticket.code)}
+        expanded={selection.ticket_id === ticket.id}
+        button_function={() => toggleTicket(ticket.id)}
       />
       <AddLinkDialog
         open={dialogOpen === ActionButtonEnum.Add}

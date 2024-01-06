@@ -6,7 +6,7 @@ import * as t from "ts-interface-checker";
 
 export const ITicketType = t.enumtype({
   "Feature": "feature",
-  "Hotfix": "hotifx",
+  "Fix": "fix",
 });
 
 const exportedTypeSuite: t.ITypeSuite = {

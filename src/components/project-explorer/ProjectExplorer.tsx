@@ -10,7 +10,7 @@ import { AddProjectDialog } from '@dialogs/add-dialog/AddProjectDialog';
 import { NotificationContext } from '@contexts/NotificationContext';
 import { IProject } from '@models/project/IProject';
 import { ImportDataDialog } from '@dialogs/ImportDataDialog';
-import { IData } from '@models/data/IData';
+import { IProjectsData } from '@models/data/IData';
 
 interface IProps {}
 
@@ -33,13 +33,13 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
     download_data_action();
   }
 
-  const import_data_action = (new_data_info: IData) => {
+  const import_data_action = (new_data_info: IProjectsData) => {
     setNotification('success', `Projects data imported successfully!`);
     uploadData(new_data_info);
     setDialogOpen(null);
   }
 
-  const add_project_action = (new_project_info: IProject) => {
+  const add_project_action = (new_project_info: Omit<IProject, "id">) => {
     setNotification('success', `Project added successfully!`);
     addProject(new_project_info);
     setDialogOpen(null);

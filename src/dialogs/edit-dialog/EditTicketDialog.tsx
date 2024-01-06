@@ -51,6 +51,7 @@ export const EditTicketDialog = (props: IProps) => {
 
     e.stopPropagation();
     onSave({
+      id: curr_ticket_info.id,
       type: ticketType as ITicketType,
       code: ticketCode as string,
       name: ticketName as string,

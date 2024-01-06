@@ -1,9 +1,14 @@
-import { ITicket } from "@models/ticket/ITicket"
+import { ITicketData, ITicket } from "@models/ticket/ITicket"
 
-export type IProject = {
+export interface IProjectData {
     main_project: boolean,
     code: string,
     name: string,
     hidden: boolean,
+    tickets: ITicketData[],
+}
+
+export interface IProject extends IProjectData {
+    id: string,
     tickets: ITicket[],
 }

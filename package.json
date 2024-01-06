@@ -30,6 +30,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "release": "npx semantic-release",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -53,8 +54,11 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/uuid": "^9.0.3",
     "craco-alias": "^3.0.1",
+    "semantic-release": "^22.0.12",
     "ts-interface-builder": "^0.3.3"
   }
 }

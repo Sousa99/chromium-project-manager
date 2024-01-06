@@ -49,6 +49,7 @@ export const EditProjectDialog = (props: IProps) => {
 
     e.stopPropagation();
     onSave({
+      id: curr_project_info.id,
       main_project: projectMain,
       code: projectCode,
       name: projectName,

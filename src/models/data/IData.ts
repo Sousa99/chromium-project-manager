@@ -1,3 +1,4 @@
-import { IProject } from "@models/project/IProject";
+import { IProject, IProjectData } from "@models/project/IProject";
 
-export type IData = IProject[];
+export type IProjects = IProject[];
+export type IProjectsData = IProjectData[];

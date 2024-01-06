@@ -3,6 +3,7 @@
         "baseUrl": "./src",
         "paths": {
             "@models/*" : ["./models/*"],
+            "@mappers/*" : ["./mappers/*"],
             "@contexts/*": ["./contexts/*"],
             "@components/*" : ["./components/*"],
             "@organisms/*" : ["./organisms/*"],

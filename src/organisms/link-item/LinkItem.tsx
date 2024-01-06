@@ -9,15 +9,15 @@ import { RemoveLinkDialog } from '@dialogs/remove-dialog/RemoveLinkDialog';
 import { EditLinkDialog } from '@dialogs/edit-dialog/EditLinkDialog';
 
 interface IProps {
-  project_code: string,
-  ticket_code: string,
+  project_id: string,
+  ticket_id: string,
   link: ITicketLink,
 }
 
 export const LinkItem = (props: IProps): JSX.Element => {
   const {
-    project_code,
-    ticket_code,
+    project_id,
+    ticket_id,
     link,
   } = props;
 
@@ -41,13 +41,13 @@ export const LinkItem = (props: IProps): JSX.Element => {
 
   const edit_link_action = (new_link_info: ITicketLink) => {
     setNotification('success', `Link changed successfully!`);
-    editLink(project_code, ticket_code, link.url, new_link_info);
+    editLink(project_id, ticket_id, link.url, new_link_info);
     setDialogOpen(null);
   }
 
   const remove_link_action = () => {
     setNotification('success', `Link removed successfully!`);
-    removeLink(project_code, ticket_code, link.url);
+    removeLink(project_id, ticket_id, link.url);
     setDialogOpen(null);
   }
 

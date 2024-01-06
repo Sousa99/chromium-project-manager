@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 interface Selection {
-  project_code?: string,
-  ticket_code?: string,
+  project_id?: string,
+  ticket_id?: string,
 }
 
 interface ISelectionContext {
@@ -12,43 +12,43 @@ interface ISelectionContext {
 }
 
 export const SelectionContext = React.createContext<ISelectionContext>({
-  selection: { project_code: undefined, },
+  selection: { project_id: undefined, },
   toggleProject: () => {},
   toggleTicket: () => {},
 });
 
 const SelectionContextProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [selection, setSelection] = React.useState<Selection>({ project_code: undefined, ticket_code: undefined });
+  const [selection, setSelection] = React.useState<Selection>({ project_id: undefined, ticket_id: undefined });
 
-  const toggleProject = (project_code: string) => (
+  const toggleProject = (project_id: string) => (
     setSelection(prev => {
-      if (prev.project_code === project_code) {
+      if (prev.project_id === project_id) {
         return {
-          project_code: undefined,
-          ticket_code: undefined,
+          project_id: undefined,
+          ticket_id: undefined,
         }
       }
 
       return {
-        project_code: project_code,
-        ticket_code: undefined,
+        project_id: project_id,
+        ticket_id: undefined,
       }
     })
   );
 
-  const toggleTicket = (ticket_code: string) => (
+  const toggleTicket = (ticket_id: string) => (
     setSelection(prev => {
-      if (prev.ticket_code === ticket_code) {
+      if (prev.ticket_id === ticket_id) {
         return {
-          project_code: prev.project_code,
-          ticket_code: undefined,
+          project_id: prev.project_id,
+          ticket_id: undefined,
         }
       }
 
       return {
-        project_code: prev.project_code,
-        ticket_code: ticket_code,
+        project_id: prev.project_id,
+        ticket_id: ticket_id,
       }
     })
   );
