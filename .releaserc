@@ -9,7 +9,7 @@
   ],
   "assets": [
     {
-      "path": "build.zip",
+      "path": "/home/runner/work/chromium-project-manager/chromium-project-manager/build.zip",
       "name": "extension-unpacked.zip",
       "label": "Chromium extension to be loaded into browser"
     }
