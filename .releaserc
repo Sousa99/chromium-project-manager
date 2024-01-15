@@ -4,18 +4,14 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    [
-      "@semantic-release/github",
-      {
-        "assets":[
-          {
-            "path": "/home/runner/work/chromium-project-manager/chromium-project-manager/build.zip",
-            "name": "extension-unpacked.zip",
-            "label": "Chromium extension to be loaded into browser"
-          }
-        ]
-      }
-    ],
+    "@semantic-release/github",
     "@semantic-release/git"
+  ],
+  "assets": [
+    {
+      "path": "build.zip",
+      "name": "extension-unpacked.zip",
+      "label": "Chromium extension to be loaded into browser"
+    }
   ]
 }
