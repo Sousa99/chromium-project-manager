@@ -99,7 +99,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Respect Search
     filtered_data.forEach((project) => {
-      project.tickets = project.tickets.filter((ticket) => filter_search(filter, [ticket.id, ticket.name]));
+      project.tickets = project.tickets.filter((ticket) => filter_search(filter, [ticket.code, ticket.name]));
     });
 
     return filtered_data;
