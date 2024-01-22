@@ -49,7 +49,7 @@ export const DataContext = React.createContext<IDataContext>({
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [data, setData] = React.useState<IProjects>(convertDataToImport(mock_info));
+  const [data, setData] = React.useState<IProjects>([]);
   const [loadedFromStorage, setLoadedFromStorage] = React.useState<boolean>(false);
 
   const filter_hidden = (filter: Filter, hidden_attr: boolean) => filter.show_hidden || !hidden_attr;
@@ -85,7 +85,8 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     if (chrome && chrome.storage && loadedFromStorage) {
-      chrome.storage.local.set({[DATA_STORAGE_KEY]: data});
+      const dataToExport: IProjectsData = convertDataToExport(data);
+      chrome.storage.local.set({[DATA_STORAGE_KEY]: dataToExport});
     }
   }, [loadedFromStorage, data]);
 
@@ -99,7 +100,7 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Respect Search
     filtered_data.forEach((project) => {
-      project.tickets = project.tickets.filter((ticket) => filter_search(filter, [ticket.id, ticket.name]));
+      project.tickets = project.tickets.filter((ticket) => filter_search(filter, [ticket.code, ticket.name]));
     });
 
     return filtered_data;
