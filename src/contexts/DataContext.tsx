@@ -85,7 +85,8 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     if (chrome && chrome.storage && loadedFromStorage) {
-      chrome.storage.local.set({[DATA_STORAGE_KEY]: data});
+      const dataToExport: IProjectsData = convertDataToExport(data);
+      chrome.storage.local.set({[DATA_STORAGE_KEY]: dataToExport});
     }
   }, [loadedFromStorage, data]);
 
