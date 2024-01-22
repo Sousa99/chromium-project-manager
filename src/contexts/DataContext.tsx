@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { mock_info } from '@resources/mock-info';
 import { Filter } from './FilterContext';
 import { IProjects, IProjectsData } from '@models/data/IData';
 import { IProject } from '@models/project/IProject';
