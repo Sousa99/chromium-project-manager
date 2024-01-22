@@ -49,7 +49,7 @@ export const DataContext = React.createContext<IDataContext>({
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [data, setData] = React.useState<IProjects>(convertDataToImport(mock_info));
+  const [data, setData] = React.useState<IProjects>([]);
   const [loadedFromStorage, setLoadedFromStorage] = React.useState<boolean>(false);
 
   const filter_hidden = (filter: Filter, hidden_attr: boolean) => filter.show_hidden || !hidden_attr;
