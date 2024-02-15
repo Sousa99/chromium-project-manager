@@ -1,10 +1,10 @@
 <div align="center" width="100%">
     <h1> 📒 Chromium Project Manager </h1>
     <div align="center" width="100%">
-        <a href="" alt="Edge Extension">
+        <a href="https://microsoftedge.microsoft.com/addons/detail/chromium-project-and-tick/lmommmfjoeelaikbmmlcebpjcnoaljdj" target="_blank" alt="Edge Extension">
             <img src="https://img.shields.io/badge/Edge%20Extension-0078D7?style=flat&logo=microsoftedge&logoColor=0078D7&labelColor=EEEEEE" />
         </a>
-        <a href="https://chromewebstore.google.com/detail/chromium-project-and-tick/lmnmajkmfjlnjjeeiaodkekfblbdkfoi?hl=pt-PT&authuser=0&pli=1" alt="Chrome Extension">
+        <a href="https://chromewebstore.google.com/detail/chromium-project-and-tick/lmnmajkmfjlnjjeeiaodkekfblbdkfoi?hl=pt-PT&authuser=0&pli=1" target="_blank" alt="Chrome Extension">
             <img src="https://img.shields.io/badge/Chrome%20Extension-4285F4?style=flat&logo=googlechrome&logoColor=4285F4&labelColor=EEEEEE" />
         </a>
     </div>
