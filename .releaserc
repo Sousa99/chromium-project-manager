@@ -1,17 +1,45 @@
 {
   "branches": [ "main" ],
   "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
-    "@semantic-release/github",
-    "@semantic-release/git"
-  ],
-  "assets": [
-    {
-      "path": "build.zip",
-      "name": "extension-unpacked.zip",
-      "label": "Chromium extension to be loaded into browser"
-    }
+    [
+      "@semantic-release/commit-analyzer",
+      {}
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {}
+    ],
+    [
+      "@semantic-release/changelog",
+      {}
+    ],
+    [
+      "@semantic-release/npm",
+      {}
+    ],
+    [
+      "semantic-release-chrome",
+      {
+        "distFolder": "build",
+        "asset": "build.zip",
+        "target": "local"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {}
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "build.zip",
+            "name": "extension-unpacked.zip",
+            "label": "Chromium extension to be loaded into browser"
+          }
+        ]
+      }
+    ]
   ]
 }
