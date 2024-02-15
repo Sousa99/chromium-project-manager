@@ -26,6 +26,9 @@ jobs:
       - name: 📦 Install Dependencies
         run: npm install
 
+      - name: 🏗️ Build Project
+        run: npm run build
+
       - name: 🚀 Run Semantic Release
         run: npm run release
         env:
