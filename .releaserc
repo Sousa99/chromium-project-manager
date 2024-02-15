@@ -18,6 +18,14 @@
       {}
     ],
     [
+      "semantic-release-chrome",
+      {
+        "distFolder": "build",
+        "asset": "build.zip",
+        "target": "local"
+      }
+    ],
+    [
       "@semantic-release/git",
       {}
     ],
