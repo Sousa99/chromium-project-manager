@@ -26,11 +26,6 @@ jobs:
       - name: 📦 Install Dependencies
         run: npm install
 
-      - name: 🏗️ Build and Compress Project
-        run: |
-          npm run build
-          zip -r build.zip build
-
       - name: 🚀 Run Semantic Release
         run: npm run release
         env:
