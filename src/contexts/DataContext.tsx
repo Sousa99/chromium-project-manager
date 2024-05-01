@@ -172,7 +172,6 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addProject = (new_project_info: Omit<IProject, "id">) => {
     setData(data => {
-      debugger;
       let new_data: IProjects = deepcopy(data);
 
       let new_project: IProject = { id: uuidv4(), ...new_project_info };
@@ -207,7 +206,6 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addTicket = (project_id: string, new_ticket_info: Omit<ITicket, "id">) => {
     setData(data => {
-      debugger;
       let new_data: IProjects = deepcopy(data);
       
       let [, project] = getProjectIndex(new_data, project_id);
