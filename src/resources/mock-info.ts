@@ -1,5 +1,6 @@
 import { IProjectsData } from "@models/data/IData";
 import { ITicketType } from "@models/ticket/ITicketType";
+import { DEFAULT_FEATURE_BRANCH_MODE, DEFAULT_PULL_REQUEST_MODE, DEFAULT_REPORT_MODE } from "@helpers/project-modes-helper";
 
 export const mock_info: IProjectsData = [
     {
@@ -35,8 +36,12 @@ export const mock_info: IProjectsData = [
                 hidden: true,
                 type: ITicketType.Feature,
                 links: []
-            }
-        ]
+            }],
+        modes: {
+            feature_branch: DEFAULT_FEATURE_BRANCH_MODE,
+            pull_request: DEFAULT_PULL_REQUEST_MODE,
+            report: DEFAULT_REPORT_MODE,
+        }
     },
     {
         main_project: false,
@@ -64,7 +69,11 @@ export const mock_info: IProjectsData = [
                         url: 'https://github.com/Sousa99/DMEIC-2122'
                     }
                 ]
-            },
-        ]
+            }],
+        modes: {
+            feature_branch: DEFAULT_FEATURE_BRANCH_MODE,
+            pull_request: DEFAULT_PULL_REQUEST_MODE,
+            report: DEFAULT_REPORT_MODE,
+        }
     },
 ]

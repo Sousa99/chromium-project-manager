@@ -10,11 +10,13 @@ export const IProjectData = t.iface([], {
   "name": "string",
   "hidden": "boolean",
   "tickets": t.array("ITicketData"),
+  "modes": t.opt("IProjectModes"),
 });
 
 export const IProject = t.iface(["IProjectData"], {
   "id": "string",
   "tickets": t.array("ITicket"),
+  "modes": "IProjectModes",
 });
 
 const exportedTypeSuite: t.ITypeSuite = {

@@ -39,6 +39,7 @@ export const ProjectItem = (props: IProps): JSX.Element => {
           project_id={project.id}
           project_main={project.main_project}
           project_code={project.code}
+          project_modes={project.modes}
           ticket={ticket}
         />
       ))}

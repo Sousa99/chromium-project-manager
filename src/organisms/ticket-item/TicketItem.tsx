@@ -17,11 +17,13 @@ import { NotificationContext } from '@contexts/NotificationContext';
 import { AddLinkDialog } from '@dialogs/add-dialog/AddLinkDialog';
 import { ITicketLink } from '@models/ticket/ITicketLink';
 import { EditTicketDialog } from '@dialogs/edit-dialog/EditTicketDialog';
+import { IProjectModes } from '@models/project/IProjectModes';
 
 interface IProps {
   project_id: string,
   project_main: boolean,
   project_code: string,
+  project_modes: IProjectModes,
   ticket: ITicket
 }
 
@@ -30,6 +32,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
     project_id,
     project_main,
     project_code,
+    project_modes,
     ticket
   } = props;
 
@@ -69,6 +72,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
   sub_buttons.push(
     <ModeButtons
       key='mode'
+      project_modes={project_modes}
       project_main={project_main}
       project_code={project_code}
       type={ticket.type}

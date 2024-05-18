@@ -9,6 +9,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './AddDialog.scss';
 import './AddProjectDialog.scss';
 import { IProject } from "@models/project/IProject";
+import { DEFAULT_FEATURE_BRANCH_MODE, DEFAULT_PULL_REQUEST_MODE, DEFAULT_REPORT_MODE } from '@helpers/project-modes-helper';
 
 interface IProps {
   open: boolean,
@@ -51,7 +52,12 @@ export const AddProjectDialog = (props: IProps) => {
       code: projectCode,
       name: projectName,
       hidden: projectHidden,
-      tickets: []
+      tickets: [],
+      modes: {
+        feature_branch: DEFAULT_FEATURE_BRANCH_MODE,
+        pull_request: DEFAULT_PULL_REQUEST_MODE,
+        report: DEFAULT_REPORT_MODE
+      }
     });
   }
 
