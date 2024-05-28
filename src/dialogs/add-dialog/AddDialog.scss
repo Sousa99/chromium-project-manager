@@ -1,7 +1,7 @@
 .add-dialog {
   width: 100%;
 
-  .MuiDialogTitle-root+.css-ypiqx9-MuiDialogContent-root {
+  .MuiDialogTitle-root + .css-ypiqx9-MuiDialogContent-root {
     padding-top: 20px;
   }
 
@@ -11,7 +11,7 @@
     max-width: 100%;
 
     padding-top: 5px;
-    
+
     flex-direction: column;
     gap: 20px;
 

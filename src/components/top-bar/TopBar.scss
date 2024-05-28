@@ -10,41 +10,40 @@
 
     gap: 10px;
     padding: 10px 15px;
-    
+
     .search-box {
       width: 100%;
       margin-left: 0;
-  
+
       display: flex;
       justify-content: flex-start;
       align-items: center;
       align-content: center;
-  
+
       background-color: #ffffff26;
       border-radius: 4px;
-  
+
       .search-icon-wrapper {
         height: 100%;
         display: flex;
         padding: 0 16px;
-  
+
         justify-content: center;
         align-items: center;
-  
+
         pointer-events: none;
       }
-  
+
       .input-box {
         width: 100%;
-  
+
         color: inherit;
-  
+
         & .MuiInputBase-input {
-          width: '100%';
+          width: "100%";
           padding: 8px 8px 8px 0;
         }
       }
     }
-
   }
 }

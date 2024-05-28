@@ -1,55 +1,53 @@
-import * as React from 'react';
+import * as React from "react";
 
 import { LineItemUrl } from "@molecules/line-item/LineItemUrl";
 import { ITicketLink } from "@models/ticket/ITicketLink";
-import { ActionButtonEnum, ActionButtons } from "@molecules/action-buttons/ActionButtons";
+import {
+  ActionButtonEnum,
+  ActionButtons,
+} from "@molecules/action-buttons/ActionButtons";
 import { DataContext } from "@contexts/DataContext";
-import { NotificationContext } from '@contexts/NotificationContext';
-import { RemoveLinkDialog } from '@dialogs/remove-dialog/RemoveLinkDialog';
-import { EditLinkDialog } from '@dialogs/edit-dialog/EditLinkDialog';
+import { NotificationContext } from "@contexts/NotificationContext";
+import { RemoveLinkDialog } from "@dialogs/remove-dialog/RemoveLinkDialog";
+import { EditLinkDialog } from "@dialogs/edit-dialog/EditLinkDialog";
 
 interface IProps {
-  project_id: string,
-  ticket_id: string,
-  link: ITicketLink,
+  project_id: string;
+  ticket_id: string;
+  link: ITicketLink;
 }
 
 export const LinkItem = (props: IProps): JSX.Element => {
-  const {
-    project_id,
-    ticket_id,
-    link,
-  } = props;
+  const { project_id, ticket_id, link } = props;
 
-  const [ dialogOpen, setDialogOpen ] = React.useState<ActionButtonEnum | null>(null);
+  const [dialogOpen, setDialogOpen] = React.useState<ActionButtonEnum | null>(
+    null,
+  );
 
   const { editLink, removeLink } = React.useContext(DataContext);
   const { setNotification } = React.useContext(NotificationContext);
 
   const sub_buttons: JSX.Element[] = [
     <ActionButtons
-      key='action'
-      item_key='Link'
-      sub_item_key=''
-      active_actions={new Set([
-        ActionButtonEnum.Edit,
-        ActionButtonEnum.Remove
-      ])}
+      key="action"
+      item_key="Link"
+      sub_item_key=""
+      active_actions={new Set([ActionButtonEnum.Edit, ActionButtonEnum.Remove])}
       onClick={(action: ActionButtonEnum) => setDialogOpen(action)}
-    />
+    />,
   ];
 
   const edit_link_action = (new_link_info: ITicketLink) => {
-    setNotification('success', `Link changed successfully!`);
+    setNotification("success", `Link changed successfully!`);
     editLink(project_id, ticket_id, link.url, new_link_info);
     setDialogOpen(null);
-  }
+  };
 
   const remove_link_action = () => {
-    setNotification('success', `Link removed successfully!`);
+    setNotification("success", `Link removed successfully!`);
     removeLink(project_id, ticket_id, link.url);
     setDialogOpen(null);
-  }
+  };
 
   return (
     <>
@@ -71,5 +69,5 @@ export const LinkItem = (props: IProps): JSX.Element => {
         onCancel={() => setDialogOpen(null)}
       />
     </>
-  )
-}
+  );
+};

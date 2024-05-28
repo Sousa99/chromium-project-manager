@@ -1,18 +1,18 @@
-import { Collapse } from '@mui/material';
+import { Collapse } from "@mui/material";
 
-import './LineItem.scss';
+import "./LineItem.scss";
 
-import { LineItemButton } from '@atoms/line-item-button/LineItemButton';
+import { LineItemButton } from "@atoms/line-item-button/LineItemButton";
 
 interface IProps {
-  title: string,
-  iconOpened: JSX.Element,
-  iconClosed: JSX.Element,
-  children?: JSX.Element,
-  sub_buttons?: JSX.Element[],
+  title: string;
+  iconOpened: JSX.Element;
+  iconClosed: JSX.Element;
+  children?: JSX.Element;
+  sub_buttons?: JSX.Element[];
   // Interaction with collapsible
-  expanded: boolean,
-  button_function: () => void,
+  expanded: boolean;
+  button_function: () => void;
 }
 
 export const LineItemCollapsable = (props: IProps): JSX.Element => {
@@ -31,17 +31,15 @@ export const LineItemCollapsable = (props: IProps): JSX.Element => {
   };
 
   return (
-    <section className='line-item-atom collapsable'>
+    <section className="line-item-atom collapsable">
       <LineItemButton
         title={title}
-        icon={ expanded ? iconOpened : iconClosed }
+        icon={expanded ? iconOpened : iconClosed}
         sub_buttons={sub_buttons}
-        button_styling={ expanded ? gradientStyle : {} }
+        button_styling={expanded ? gradientStyle : {}}
         button_function={button_function}
       />
-      <Collapse in={expanded}>
-        { children }
-      </Collapse>
+      <Collapse in={expanded}>{children}</Collapse>
     </section>
-  )
-}
+  );
+};

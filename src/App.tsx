@@ -1,32 +1,31 @@
-import React from 'react';
+import React from "react";
 
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
-import { dark_theme } from './resources/theme';
+import { dark_theme } from "./resources/theme";
 
-import './App.scss';
+import "./App.scss";
 
-import { ProjectExplorer } from '@components/project-explorer/ProjectExplorer';
-import { TopBar } from '@components/top-bar/TopBar';
-import { NotificationBlock } from '@molecules/notification-block/NotificationBlock';
-import ContextProviders from '@contexts/ContextProviders';
+import { ProjectExplorer } from "@components/project-explorer/ProjectExplorer";
+import { TopBar } from "@components/top-bar/TopBar";
+import { NotificationBlock } from "@molecules/notification-block/NotificationBlock";
+import ContextProviders from "@contexts/ContextProviders";
 
 const theme = createTheme(dark_theme);
 
 function App() {
-
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <CssBaseline/>
+        <CssBaseline />
         <ContextProviders>
-          <TopBar/>
-          <ProjectExplorer/>
-          <NotificationBlock/>
+          <TopBar />
+          <ProjectExplorer />
+          <NotificationBlock />
         </ContextProviders>
       </ThemeProvider>
     </div>
-  )
+  );
 }
 
 export default App;

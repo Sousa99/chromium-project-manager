@@ -5,9 +5,9 @@ import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
 export const IProjectModes = t.iface([], {
-  "feature_branch": "string",
-  "pull_request": "string",
-  "report": "string",
+  feature_branch: "string",
+  pull_request: "string",
+  report: "string",
 });
 
 const exportedTypeSuite: t.ITypeSuite = {

@@ -5,16 +5,16 @@ import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
 export const ITicketData = t.iface([], {
-  "type": "ITicketType",
-  "code": "string",
-  "name": "string",
-  "url": t.opt("string"),
-  "hidden": "boolean",
-  "links": t.array("ITicketLink"),
+  type: "ITicketType",
+  code: "string",
+  name: "string",
+  url: t.opt("string"),
+  hidden: "boolean",
+  links: t.array("ITicketLink"),
 });
 
 export const ITicket = t.iface(["ITicketData"], {
-  "id": "string",
+  id: "string",
 });
 
 const exportedTypeSuite: t.ITypeSuite = {
