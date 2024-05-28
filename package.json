@@ -29,6 +29,8 @@
   },
   "scripts": {
     "start": "craco start",
+    "format:check": "npx prettier . --check",
+    "format:write": "npx prettier . --write",
     "build": "craco build",
     "release": "npx semantic-release",
     "test": "react-scripts test",
@@ -58,8 +60,9 @@
     "@semantic-release/git": "10.0.1",
     "@types/uuid": "9.0.3",
     "craco-alias": "3.0.1",
+    "prettier": "3.2.5",
     "semantic-release": "22.0.12",
-    "semantic-release-chrome": "^3.2.0",
+    "semantic-release-chrome": "3.2.0",
     "ts-interface-builder": "0.3.3"
   }
 }
