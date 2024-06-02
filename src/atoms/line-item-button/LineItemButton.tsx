@@ -16,6 +16,7 @@ export const LineItemButton = (props: IProps) => {
 
   return (
     <Button
+      component="div"
       variant="outlined"
       className="line-button-item"
       onClick={button_function}
