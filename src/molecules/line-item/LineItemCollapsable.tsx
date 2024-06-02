@@ -27,7 +27,7 @@ export const LineItemCollapsable = (props: IProps): JSX.Element => {
   } = props;
 
   const gradientStyle = {
-    background: `linear-gradient(to right, rgba(135, 189, 81, 0.5), transparent 5%)`,
+    background: `linear-gradient(to right, rgba(216, 202, 85, 0.15), transparent 100%)`,
   };
 
   return (

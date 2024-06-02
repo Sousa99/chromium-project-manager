@@ -2,7 +2,7 @@ import React from "react";
 
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
-import { dark_theme } from "./resources/theme";
+import { themeOptions } from "./resources/theme";
 
 import "./App.scss";
 
@@ -11,7 +11,7 @@ import { TopBar } from "@components/top-bar/TopBar";
 import { NotificationBlock } from "@molecules/notification-block/NotificationBlock";
 import ContextProviders from "@contexts/ContextProviders";
 
-const theme = createTheme(dark_theme);
+const theme = createTheme(themeOptions);
 
 function App() {
   return (

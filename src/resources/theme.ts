@@ -18,12 +18,12 @@ declare module "@mui/material/Button" {
 
 const default_theme = createTheme();
 
-export const dark_theme: ThemeOptions = {
+export const themeOptions: ThemeOptions = {
   palette: {
     primary: {
-      light: "#99C46E",
-      main: "#87BD51",
-      dark: "#43691D",
+      light: "#F7DB84",
+      main: "#F1C63E",
+      dark: "#C5972F",
       contrastText: "#FFFFFF",
     },
     secondary: {
