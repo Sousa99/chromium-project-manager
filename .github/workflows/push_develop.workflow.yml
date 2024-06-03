@@ -7,7 +7,7 @@ on:
       - develop
 
 jobs:
-  release:
+  check:
     runs-on: ubuntu-latest
     permissions:
       contents: write
