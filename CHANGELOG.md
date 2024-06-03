@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/Sousa99/chromium-project-manager/compare/v1.1.0...v1.2.0) (2024-06-03)
+
+
+### Bug Fixes
+
+* eslint warnings ([bd8b480](https://github.com/Sousa99/chromium-project-manager/commit/bd8b480b0cab5f894b3591d0f8ec79ae0f7d7c10))
+* input with default with wrong styling ([a19f94d](https://github.com/Sousa99/chromium-project-manager/commit/a19f94d43b1ec93fe58649fc6e4db11d26efc720))
+* prevent unshow children on collapsible from being rendered ([89c90b4](https://github.com/Sousa99/chromium-project-manager/commit/89c90b44374366427045688e61da6e5203c3ad15))
+
+
+### Features
+
+* adjust styling to match new developed icon ([e5312fc](https://github.com/Sousa99/chromium-project-manager/commit/e5312fcf4ec5758e3d06f19529b4d441e72afc46))
+* develop advanced configurations for project configuration ([d99c860](https://github.com/Sousa99/chromium-project-manager/commit/d99c860443a2f1976430279daffb3e94e1577bbc))
+
 # [1.1.0](https://github.com/Sousa99/chromium-project-manager/compare/v1.0.4...v1.1.0) (2024-02-15)
 
 ### Features
