@@ -11,20 +11,21 @@
 </div>
 
 ## 📄 Table of Contents
+
 1. [💡 Motivation for the Project](#💡-motivation-for-the-project)
-    - [Why This Extension?](#🚀-why-this-extension)
-    - [Project Goals](#🌐-project-goals)
-    - [Join the Journey](#🌈-join-the-journey)
+   - [Why This Extension?](#🚀-why-this-extension)
+   - [Project Goals](#🌐-project-goals)
+   - [Join the Journey](#🌈-join-the-journey)
 2. [⚙️ How to Run](#⚙️-how-to-run)
-    - [Prerequisites](#⚠️-prerequisites)
-    - [Installation](#📥-installation)
-    - [Building the Project](#🏗️-building-the-project)
+   - [Prerequisites](#⚠️-prerequisites)
+   - [Installation](#📥-installation)
+   - [Building the Project](#🏗️-building-the-project)
 3. [🏈 How to Use](#🏈-how-to-use)
-    - [Loading the Extension in Chromium Manually](#🔄-loading-the-extension-in-chromium-manually)
-    - [Usage](#🌐-usage)
+   - [Loading the Extension in Chromium Manually](#🔄-loading-the-extension-in-chromium-manually)
+   - [Usage](#🌐-usage)
 4. [🤝 Contributing](#🤝-contributing)
 
-------
+---
 
 ## 💡 Motivation for the Project
 
@@ -35,20 +36,25 @@ As a developer, I understand the importance of having a centralized hub to track
 ### 🚀 Why This Extension?
 
 #### 1. **Effortless Ticket Management:**
+
 Streamline your workflow by easily creating and managing projects and associated tickets within the Chromium browser.
 
 #### 2. **Quick Access to Underlying Tasks:**
+
 Accelerate your development process by swiftly accessing tickets under active development, ensuring a seamless transition between tasks.
 
 #### 3. **Sprint Review Presentations Made Easy:**
+
 Simplify sprint reviews by having all pertinent ticket information readily available. Showcase progress, related branches, and pull requests effortlessly.
 
 #### 4. **Clipboard Copy for Efficiency:**
+
 Save time with the one-click clipboard copy feature. Copy code for branches, pull request titles, or any other essential information with ease.
 
 ### 🌐 Project Goals
 
 This extension aims to:
+
 - Provide a user-friendly interface for efficient project and ticket management.
 - Enhance collaboration by facilitating quick access to task-related information.
 - Improve the overall development process by offering utilities for code-related tasks.
@@ -74,21 +80,21 @@ To get started with this Chromium extension project, follow the steps below:
 
 1. Clone the repository to your local machine:
 
-    ```bash
-    git clone https://github.com/Sousa99/chromium-project-manager.git
-    ```
+   ```bash
+   git clone https://github.com/Sousa99/chromium-project-manager.git
+   ```
 
 2. Navigate to the project directory:
 
-    ```bash
-    cd chromium-project-manager
-    ```
+   ```bash
+   cd chromium-project-manager
+   ```
 
 3. Install dependencies using npm:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 ### 🏗️ Building the Project
 
@@ -101,6 +107,7 @@ npm run build
 This command generates a build directory with the necessary files for your Chromium extension.
 
 ### 🚀 Running the Project
+
 Once you have built the project, you can run the development server with hot reload. Use the following command:
 
 ```bash
@@ -112,6 +119,7 @@ This command starts the development server, and you can access the extension in 
 ## 🏈 How to Use
 
 ### 🔄 Loading the Extension in Chromium Manually
+
 1. Open your Chromium browser.
 2. Navigate to chrome://extensions/.
 3. Enable "Developer mode" at the top right corner.
@@ -120,11 +128,13 @@ This command starts the development server, and you can access the extension in 
 The extension should now be loaded in your Chromium browser.
 
 ### 🌐 Usage
+
 After loading the extension, you can start managing projects and tickets directly from the Chromium browser. Access the extension toolbar to create projects, add tickets, and utilize the various features it offers.
 
 Feel free to explore and customize the extension to suit your workflow!
 
 ## 🤝 Contributing
+
 If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Your contributions are highly appreciated!
 
 Happy coding! 🚀

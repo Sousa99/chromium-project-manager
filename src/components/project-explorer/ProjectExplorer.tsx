@@ -1,24 +1,30 @@
-import * as React from 'react';
+import * as React from "react";
 
 import "./ProjectExplorer.scss";
 
 import { ProjectItem } from "@organisms/project-item/ProjectItem";
-import { DataContext } from '@contexts/DataContext';
-import { FilterContext } from '@contexts/FilterContext';
-import { ProjectButtonEnum, ProjectButtons } from '@molecules/project-buttons/ProjectButtons';
-import { AddProjectDialog } from '@dialogs/add-dialog/AddProjectDialog';
-import { NotificationContext } from '@contexts/NotificationContext';
-import { IProject } from '@models/project/IProject';
-import { ImportDataDialog } from '@dialogs/ImportDataDialog';
-import { IProjectsData } from '@models/data/IData';
+import { DataContext } from "@contexts/DataContext";
+import { FilterContext } from "@contexts/FilterContext";
+import {
+  ProjectButtonEnum,
+  ProjectButtons,
+} from "@molecules/project-buttons/ProjectButtons";
+import { AddProjectDialog } from "@dialogs/add-dialog/AddProjectDialog";
+import { NotificationContext } from "@contexts/NotificationContext";
+import { IProject } from "@models/project/IProject";
+import { ImportDataDialog } from "@dialogs/ImportDataDialog";
+import { IProjectsData } from "@models/data/IData";
 
 interface IProps {}
 
 export const ProjectExplorer = (props: IProps): JSX.Element => {
+  const [dialogOpen, setDialogOpen] = React.useState<Exclude<
+    ProjectButtonEnum,
+    ProjectButtonEnum.Download
+  > | null>(null);
 
-  const [ dialogOpen, setDialogOpen ] = React.useState<Exclude<ProjectButtonEnum, ProjectButtonEnum.Download> | null>(null);
-
-  const { getData, downloadData, uploadData, addProject } = React.useContext(DataContext);
+  const { getData, downloadData, uploadData, addProject } =
+    React.useContext(DataContext);
   const { filter } = React.useContext(FilterContext);
   const { setNotification } = React.useContext(NotificationContext);
 
@@ -31,35 +37,32 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
     }
 
     download_data_action();
-  }
+  };
 
   const import_data_action = (new_data_info: IProjectsData) => {
-    setNotification('success', `Projects data imported successfully!`);
+    setNotification("success", `Projects data imported successfully!`);
     uploadData(new_data_info);
     setDialogOpen(null);
-  }
+  };
 
   const add_project_action = (new_project_info: Omit<IProject, "id">) => {
-    setNotification('success', `Project added successfully!`);
+    setNotification("success", `Project added successfully!`);
     addProject(new_project_info);
     setDialogOpen(null);
-  }
+  };
 
   const download_data_action = () => {
-    setNotification('success', `Projects data downloaded successfully!`);
+    setNotification("success", `Projects data downloaded successfully!`);
     downloadData();
-  }
-  
+  };
+
   return (
     <>
       <article className="project-explorer-component">
-        { projects.map(project => (
-          <ProjectItem
-            key={project.code}
-            project={project}
-          />
+        {projects.map((project) => (
+          <ProjectItem key={project.code} project={project} />
         ))}
-        <ProjectButtons onClick={onClickProjectButtons}/>
+        <ProjectButtons onClick={onClickProjectButtons} />
       </article>
       <ImportDataDialog
         open={dialogOpen === ProjectButtonEnum.Import}
@@ -72,5 +75,5 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
         onCancel={() => setDialogOpen(null)}
       />
     </>
-  )  
-}
+  );
+};

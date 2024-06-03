@@ -5,8 +5,8 @@ import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
 export const ITicketType = t.enumtype({
-  "Feature": "feature",
-  "Fix": "fix",
+  Feature: "feature",
+  Fix: "fix",
 });
 
 const exportedTypeSuite: t.ITypeSuite = {

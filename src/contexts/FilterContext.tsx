@@ -1,19 +1,19 @@
-import * as React from 'react';
+import * as React from "react";
 
 export interface Filter {
-  search_string: string,
-  show_hidden: boolean,
+  search_string: string;
+  show_hidden: boolean;
 }
 
 interface IFilterContext {
-  filter: Filter,
-  setSearch: (value: string) => void,
-  setVisibility: (value: boolean) => void,
+  filter: Filter;
+  setSearch: (value: string) => void;
+  setVisibility: (value: boolean) => void;
 }
 
 export const FilterContext = React.createContext<IFilterContext>({
   filter: {
-    search_string: '',
+    search_string: "",
     show_hidden: false,
   },
   setSearch: () => {},
@@ -21,8 +21,7 @@ export const FilterContext = React.createContext<IFilterContext>({
 });
 
 const FilterContextProvider = ({ children }: { children: React.ReactNode }) => {
-
-  const [searchString, setSearchString] = React.useState<string>('');
+  const [searchString, setSearchString] = React.useState<string>("");
   const [showHidden, setShowHidden] = React.useState<boolean>(false);
 
   const filterContextValue = {
@@ -36,9 +35,9 @@ const FilterContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <FilterContext.Provider value={filterContextValue}>
-      { children }
+      {children}
     </FilterContext.Provider>
-  )
-}
+  );
+};
 
 export default FilterContextProvider;

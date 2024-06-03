@@ -1,18 +1,19 @@
-import { Collapse } from '@mui/material';
+import React from "react";
+import { Collapse } from "@mui/material";
 
-import './LineItem.scss';
+import "./LineItem.scss";
 
-import { LineItemButton } from '@atoms/line-item-button/LineItemButton';
+import { LineItemButton } from "@atoms/line-item-button/LineItemButton";
 
 interface IProps {
-  title: string,
-  iconOpened: JSX.Element,
-  iconClosed: JSX.Element,
-  children?: JSX.Element,
-  sub_buttons?: JSX.Element[],
+  title: string;
+  iconOpened: JSX.Element;
+  iconClosed: JSX.Element;
+  sub_buttons?: JSX.Element[];
   // Interaction with collapsible
-  expanded: boolean,
-  button_function: () => void,
+  expanded: boolean;
+  children_generator: () => JSX.Element;
+  button_function: () => void;
 }
 
 export const LineItemCollapsable = (props: IProps): JSX.Element => {
@@ -20,28 +21,51 @@ export const LineItemCollapsable = (props: IProps): JSX.Element => {
     title,
     iconOpened,
     iconClosed,
-    children = [],
     sub_buttons,
-    expanded,
+    expanded: triggerExpand,
+    children_generator,
     button_function,
   } = props;
 
+  const [children, setChildren] = React.useState<JSX.Element | null>(null);
+  const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [ongoingTimeout, setOngoingTimeout] =
+    React.useState<NodeJS.Timeout | null>();
+  React.useEffect(() => {
+    if (triggerExpand && !expanded) {
+      if (ongoingTimeout) {
+        clearTimeout(ongoingTimeout);
+        setOngoingTimeout(null);
+      }
+
+      setChildren(children_generator());
+      setExpanded(true);
+    } else if (!triggerExpand && expanded) {
+      if (ongoingTimeout) {
+        clearTimeout(ongoingTimeout);
+        setOngoingTimeout(null);
+      }
+
+      let timeout = setTimeout(() => setChildren(null), 10000);
+      setOngoingTimeout(timeout);
+      setExpanded(false);
+    }
+  }, [triggerExpand]);
+
   const gradientStyle = {
-    background: `linear-gradient(to right, rgba(135, 189, 81, 0.5), transparent 5%)`,
+    background: `linear-gradient(to right, rgba(216, 202, 85, 0.15), transparent 100%)`,
   };
 
   return (
-    <section className='line-item-atom collapsable'>
+    <section className="line-item-atom collapsable">
       <LineItemButton
         title={title}
-        icon={ expanded ? iconOpened : iconClosed }
+        icon={expanded ? iconOpened : iconClosed}
         sub_buttons={sub_buttons}
-        button_styling={ expanded ? gradientStyle : {} }
+        button_styling={expanded ? gradientStyle : {}}
         button_function={button_function}
       />
-      <Collapse in={expanded}>
-        { children }
-      </Collapse>
+      <Collapse in={expanded}>{children}</Collapse>
     </section>
-  )
-}
+  );
+};

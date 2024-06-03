@@ -1,26 +1,23 @@
-import * as React from 'react';
+import * as React from "react";
 
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
 
 import { ActionButton } from "./ActionButton";
 
 export interface IProps {
-  item_key: string,
-  onRemove: () => void
+  item_key: string;
+  onRemove: () => void;
 }
 
-export const RemoveButton = (props: IProps) =>  {
-  const {
-    item_key,
-    onRemove
-  } = props;
-  
+export const RemoveButton = (props: IProps) => {
+  const { item_key, onRemove } = props;
+
   return (
     <ActionButton
       tooltip={`Remove ${item_key}`}
-      icon={<CancelIcon/>}
-      color='error'
+      icon={<CancelIcon />}
+      color="error"
       onClick={onRemove}
     />
-  )
-}
+  );
+};

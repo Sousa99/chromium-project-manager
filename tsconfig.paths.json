@@ -1,16 +1,17 @@
 {
-    "compilerOptions": {
-        "baseUrl": "./src",
-        "paths": {
-            "@models/*" : ["./models/*"],
-            "@mappers/*" : ["./mappers/*"],
-            "@contexts/*": ["./contexts/*"],
-            "@components/*" : ["./components/*"],
-            "@organisms/*" : ["./organisms/*"],
-            "@molecules/*" : ["./molecules/*"],
-            "@dialogs/*" : ["./dialogs/*"],
-            "@atoms/*" : ["./atoms/*"],
-            "@resources/*" : ["./resources/*"]
-        }
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@models/*": ["./models/*"],
+      "@mappers/*": ["./mappers/*"],
+      "@contexts/*": ["./contexts/*"],
+      "@components/*": ["./components/*"],
+      "@organisms/*": ["./organisms/*"],
+      "@molecules/*": ["./molecules/*"],
+      "@dialogs/*": ["./dialogs/*"],
+      "@atoms/*": ["./atoms/*"],
+      "@helpers/*": ["./helpers/*"],
+      "@resources/*": ["./resources/*"]
     }
+  }
 }

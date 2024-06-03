@@ -1,4 +1,4 @@
 export interface ITicketLink {
-    tooltip: string,
-    url: string,
+  tooltip: string;
+  url: string;
 }

@@ -1,4 +1,4 @@
 export enum ITicketType {
-    Feature = "feature",
-    Fix = "fix",
+  Feature = "feature",
+  Fix = "fix",
 }

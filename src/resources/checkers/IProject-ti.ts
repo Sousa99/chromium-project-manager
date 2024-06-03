@@ -5,16 +5,18 @@ import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
 export const IProjectData = t.iface([], {
-  "main_project": "boolean",
-  "code": "string",
-  "name": "string",
-  "hidden": "boolean",
-  "tickets": t.array("ITicketData"),
+  main_project: "boolean",
+  code: "string",
+  name: "string",
+  hidden: "boolean",
+  tickets: t.array("ITicketData"),
+  modes: t.opt("IProjectModes"),
 });
 
 export const IProject = t.iface(["IProjectData"], {
-  "id": "string",
-  "tickets": t.array("ITicket"),
+  id: "string",
+  tickets: t.array("ITicket"),
+  modes: "IProjectModes",
 });
 
 const exportedTypeSuite: t.ITypeSuite = {

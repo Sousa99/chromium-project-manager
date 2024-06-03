@@ -1,0 +1,10 @@
+.edit-dialog .sub-dialog {
+  background-color: red;
+
+  .dialog-content {
+    display: flex;
+
+    flex-direction: column;
+    gap: 20px;
+  }
+}

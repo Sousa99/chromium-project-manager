@@ -1,53 +1,62 @@
 import { ThemeOptions, createTheme } from "@mui/material";
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Palette {
-    lowKey: Palette['primary'];
+    lowKey: Palette["primary"];
+    advanced: Palette["primary"];
   }
 
   interface PaletteOptions {
-    lowKey?: PaletteOptions['primary'];
+    lowKey?: PaletteOptions["primary"];
+    advanced?: PaletteOptions["primary"];
   }
 }
 
-declare module '@mui/material/Button' {
+declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     lowKey: true;
+    advanced: true;
   }
 }
 
 const default_theme = createTheme();
 
-export const dark_theme: ThemeOptions = {
+export const themeOptions: ThemeOptions = {
   palette: {
     primary: {
-      light: '#99C46E',
-      main: '#87BD51',
-      dark: '#43691D',
-      contrastText: '#FFFFFF',
+      light: "#F7DB84",
+      main: "#F1C63E",
+      dark: "#C5972F",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      light: '#FF7961',
-      main: '#F44336',
-      dark: '#BA000D',
-      contrastText: '#000000',
+      light: "#FF7961",
+      main: "#F44336",
+      dark: "#BA000D",
+      contrastText: "#000000",
     },
     lowKey: default_theme.palette.augmentColor({
       color: {
-        main: '#757575',
+        main: "#757575",
       },
-      name: 'lowKey',
+      name: "lowKey",
+    }),
+    advanced: default_theme.palette.augmentColor({
+      color: {
+        main: "#7979c3",
+      },
+      name: "advanced",
     }),
     background: {
-      default: '#1C1D1F',
-      paper: '#202123',
+      default: "#1C1D1F",
+      paper: "#202123",
     },
     text: {
-      primary: '#CCCCCC',
-      secondary: '#CCCCCC'
+      primary: "#CCCCCC",
+      secondary: "#CCCCCC",
     },
     action: {
-      hover: '#18191A',
+      hover: "#18191A",
     },
   },
-}
+};
