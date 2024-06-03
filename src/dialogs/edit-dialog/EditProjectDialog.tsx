@@ -58,6 +58,7 @@ export const EditProjectDialog = (props: IProps) => {
     setProjectCode(curr_project_info.code);
     setProjectName(curr_project_info.name);
     setProjectHidden(curr_project_info.hidden);
+    setProjectModesConfiguration(curr_project_info.modes);
   }, [curr_project_info, open]);
 
   const _onSave = (e: React.MouseEvent<HTMLButtonElement>) => {

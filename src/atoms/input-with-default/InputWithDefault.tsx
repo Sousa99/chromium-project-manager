@@ -37,6 +37,7 @@ export const InputWithDefault = (props: IProps) => {
         variant="text"
         size="small"
         className="reset-button"
+        color="advanced"
         disabled={value_is_default}
         onClick={click_default}
       >

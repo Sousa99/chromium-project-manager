@@ -3,16 +3,19 @@ import { ThemeOptions, createTheme } from "@mui/material";
 declare module "@mui/material/styles" {
   interface Palette {
     lowKey: Palette["primary"];
+    advanced: Palette["primary"];
   }
 
   interface PaletteOptions {
     lowKey?: PaletteOptions["primary"];
+    advanced?: PaletteOptions["primary"];
   }
 }
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     lowKey: true;
+    advanced: true;
   }
 }
 
@@ -37,6 +40,12 @@ export const themeOptions: ThemeOptions = {
         main: "#757575",
       },
       name: "lowKey",
+    }),
+    advanced: default_theme.palette.augmentColor({
+      color: {
+        main: "#7979c3",
+      },
+      name: "advanced",
     }),
     background: {
       default: "#1C1D1F",
