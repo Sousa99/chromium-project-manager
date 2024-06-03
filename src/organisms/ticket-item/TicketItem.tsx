@@ -42,7 +42,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
   const { selection, toggleTicket } = React.useContext(SelectionContext);
   const { setNotification } = React.useContext(NotificationContext);
 
-  const children: JSX.Element = (
+  const childrenGenerator: () => JSX.Element = () => (
     <div className="children-box">
       {ticket.links.map((link) => (
         <LinkItem
@@ -118,9 +118,9 @@ export const TicketItem = (props: IProps): JSX.Element => {
         title={ticket.code}
         iconOpened={<ExpandLessIcon />}
         iconClosed={<ExpandMoreIcon />}
-        children={children}
         sub_buttons={sub_buttons}
         expanded={selection.ticket_id === ticket.id}
+        children_generator={childrenGenerator}
         button_function={() => toggleTicket(ticket.id)}
       />
       <AddLinkDialog

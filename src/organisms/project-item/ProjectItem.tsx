@@ -34,7 +34,7 @@ export const ProjectItem = (props: IProps): JSX.Element => {
   const { selection, toggleProject } = React.useContext(SelectionContext);
   const { setNotification } = React.useContext(NotificationContext);
 
-  const children: JSX.Element = (
+  const childrenGenerator: () => JSX.Element = () => (
     <div className="children-box">
       {project.tickets.map((ticket) => (
         <TicketItem
@@ -89,9 +89,9 @@ export const ProjectItem = (props: IProps): JSX.Element => {
         title={project.code}
         iconOpened={<FolderIconOff />}
         iconClosed={<FolderIcon />}
-        children={children}
         sub_buttons={sub_buttons}
         expanded={selection.project_id === project.id}
+        children_generator={childrenGenerator}
         button_function={() => toggleProject(project.id)}
       />
       <AddTicketDialog
