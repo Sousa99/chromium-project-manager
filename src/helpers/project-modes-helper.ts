@@ -1,10 +1,12 @@
 import { ITicketType } from "@models/ticket/ITicketType";
 
 // Default Mode Configurations
+/* eslint-disable no-template-curly-in-string */
 export const DEFAULT_FEATURE_BRANCH_MODE =
   "${SEMTYPE}/${CODE}_${NAME_LOWER_NOSPACES}";
 export const DEFAULT_PULL_REQUEST_MODE = "[${CODE}] ${SEMTYPE}: ${NAME}";
 export const DEFAULT_REPORT_MODE = "[${PROJECT}]: [${CODE}]: ${NAME}";
+/* eslint-enable no-template-curly-in-string */
 
 export type TicketInfo = {
   project_main: boolean;
