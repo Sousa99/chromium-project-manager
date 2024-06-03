@@ -50,7 +50,7 @@ export const LineItemCollapsable = (props: IProps): JSX.Element => {
       setOngoingTimeout(timeout);
       setExpanded(false);
     }
-  }, [triggerExpand]);
+  }, [triggerExpand, expanded, children_generator, ongoingTimeout]);
 
   const gradientStyle = {
     background: `linear-gradient(to right, rgba(216, 202, 85, 0.15), transparent 100%)`,
