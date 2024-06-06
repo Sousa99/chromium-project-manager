@@ -42,17 +42,20 @@ export const TicketItem = (props: IProps): JSX.Element => {
   const { selection, toggleTicket } = React.useContext(SelectionContext);
   const { setNotification } = React.useContext(NotificationContext);
 
-  const childrenGenerator: () => JSX.Element = () => (
-    <div className="children-box">
-      {ticket.links.map((link) => (
-        <LinkItem
-          key={link.url}
-          project_id={project_id}
-          ticket_id={ticket.id}
-          link={link}
-        />
-      ))}
-    </div>
+  const childrenGenerator = React.useCallback(
+    () => (
+      <div className="children-box">
+        {ticket.links.map((link) => (
+          <LinkItem
+            key={link.url}
+            project_id={project_id}
+            ticket_id={ticket.id}
+            link={link}
+          />
+        ))}
+      </div>
+    ),
+    [ticket.links],
   );
 
   const sub_buttons: JSX.Element[] = [];
