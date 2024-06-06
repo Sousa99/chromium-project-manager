@@ -60,7 +60,7 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
     <>
       <article className="project-explorer-component">
         {projects.map((project) => (
-          <ProjectItem key={project.code} project={project} />
+          <ProjectItem key={project.id} project={project} />
         ))}
         <ProjectButtons onClick={onClickProjectButtons} />
       </article>

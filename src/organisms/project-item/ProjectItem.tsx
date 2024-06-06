@@ -49,7 +49,13 @@ export const ProjectItem = (props: IProps): JSX.Element => {
         ))}
       </div>
     ),
-    [project.tickets],
+    [
+      project.id,
+      project.main_project,
+      project.code,
+      project.tickets,
+      project.modes,
+    ],
   );
 
   const sub_buttons: JSX.Element[] = [

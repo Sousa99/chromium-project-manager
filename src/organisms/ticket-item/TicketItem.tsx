@@ -55,7 +55,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
         ))}
       </div>
     ),
-    [ticket.links],
+    [project_id, ticket.id, ticket.links],
   );
 
   const sub_buttons: JSX.Element[] = [];
