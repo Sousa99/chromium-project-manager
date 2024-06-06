@@ -14,60 +14,80 @@ import {
   ActionButtons,
 } from "@molecules/action-buttons/ActionButtons";
 import { ActionButton } from "@atoms/action-button/ActionButton";
-import { DataContext } from "@contexts/DataContext";
 import { RemoveTicketDialog } from "@dialogs/remove-dialog/RemoveTicketDialog";
 import { NotificationContext } from "@contexts/NotificationContext";
 import { AddLinkDialog } from "@dialogs/add-dialog/AddLinkDialog";
 import { ITicketLink } from "@models/ticket/ITicketLink";
 import { EditTicketDialog } from "@dialogs/edit-dialog/EditTicketDialog";
 import { IProjectModes } from "@models/project/IProjectModes";
+import { TicketContext } from "@contexts/data/TicketContext";
+import { LinkContext } from "@contexts/data/LinkContext";
+import { FilterContext } from "@contexts/FilterContext";
 
 interface IProps {
   project_id: string;
   project_main: boolean;
   project_code: string;
   project_modes: IProjectModes;
-  ticket: ITicket;
+  ticket: string;
 }
 
 export const TicketItem = (props: IProps): JSX.Element => {
-  const { project_id, project_main, project_code, project_modes, ticket } =
-    props;
+  const {
+    project_id,
+    project_main,
+    project_code,
+    project_modes,
+    ticket: ticket_id,
+  } = props;
 
   const [dialogOpen, setDialogOpen] = React.useState<ActionButtonEnum | null>(
     null,
   );
 
-  const { addLink, editTicket, removeTicket } = React.useContext(DataContext);
+  const { getTicket, editTicket, removeTicket, getTicketLinks } =
+    React.useContext(TicketContext);
+  const { addLink } = React.useContext(LinkContext);
+  const { filter } = React.useContext(FilterContext);
   const { selection, toggleTicket } = React.useContext(SelectionContext);
   const { setNotification } = React.useContext(NotificationContext);
 
+  const ticketInfo = getTicket(project_id, ticket_id);
+  const ticketLinks = getTicketLinks(project_id, ticket_id, filter);
+
   const childrenGenerator = React.useCallback(
-    () => (
-      <div className="children-box">
-        {ticket.links.map((link) => (
-          <LinkItem
-            key={link.url}
-            project_id={project_id}
-            ticket_id={ticket.id}
-            link={link}
-          />
-        ))}
-      </div>
-    ),
-    [project_id, ticket.id, ticket.links],
+    () =>
+      ticketInfo === null ? (
+        <></>
+      ) : (
+        <div className="children-box">
+          {ticketLinks.map((link) => (
+            <LinkItem
+              key={link}
+              project_id={project_id}
+              ticket_id={ticketInfo.id}
+              link={link}
+            />
+          ))}
+        </div>
+      ),
+    [project_id, ticketInfo, ticketLinks],
   );
+
+  if (ticketInfo === null) {
+    return <></>;
+  }
 
   const sub_buttons: JSX.Element[] = [];
 
-  if (ticket.url !== undefined) {
+  if (ticketInfo.url !== undefined) {
     sub_buttons.push(
       <ActionButton
         key="action-info"
         tooltip="Ticket Link"
         icon={<InfoIcon />}
         color="info"
-        onClick={() => window.open(ticket.url, "_blank")}
+        onClick={() => window.open(ticketInfo.url, "_blank")}
       />,
     );
   }
@@ -78,9 +98,9 @@ export const TicketItem = (props: IProps): JSX.Element => {
       project_modes={project_modes}
       project_main={project_main}
       project_code={project_code}
-      type={ticket.type}
-      code={ticket.code}
-      name={ticket.name}
+      type={ticketInfo.type}
+      code={ticketInfo.code}
+      name={ticketInfo.name}
     />,
     <ActionButtons
       key="action"
@@ -99,32 +119,32 @@ export const TicketItem = (props: IProps): JSX.Element => {
 
   const add_link_action = (new_link_info: ITicketLink) => {
     setNotification("success", `Link added successfully!`);
-    addLink(project_id, ticket.id, new_link_info);
+    addLink(project_id, ticketInfo.id, new_link_info);
     setDialogOpen(null);
   };
 
-  const edit_ticket_action = (new_ticket_info: ITicket) => {
+  const edit_ticket_action = (new_ticket_info: Omit<ITicket, "links">) => {
     setNotification("success", `Ticket changed successfully!`);
-    editTicket(project_id, ticket.id, new_ticket_info);
+    editTicket(project_id, ticketInfo.id, new_ticket_info);
     setDialogOpen(null);
   };
 
   const remove_ticket_action = () => {
     setNotification("success", `Ticket removed successfully!`);
-    removeTicket(project_id, ticket.id);
+    removeTicket(project_id, ticketInfo.id);
     setDialogOpen(null);
   };
 
   return (
     <>
       <LineItemCollapsable
-        title={ticket.code}
+        title={ticketInfo.code}
         iconOpened={<ExpandLessIcon />}
         iconClosed={<ExpandMoreIcon />}
         sub_buttons={sub_buttons}
-        expanded={selection.ticket_id === ticket.id}
+        expanded={selection.ticket_id === ticketInfo.id}
         children_generator={childrenGenerator}
-        button_function={() => toggleTicket(ticket.id)}
+        button_function={() => toggleTicket(ticketInfo.id)}
       />
       <AddLinkDialog
         open={dialogOpen === ActionButtonEnum.Add}
@@ -133,13 +153,13 @@ export const TicketItem = (props: IProps): JSX.Element => {
       />
       <EditTicketDialog
         open={dialogOpen === ActionButtonEnum.Edit}
-        curr_ticket_info={ticket}
+        curr_ticket_info={ticketInfo}
         onSave={edit_ticket_action}
         onCancel={() => setDialogOpen(null)}
       />
       <RemoveTicketDialog
         open={dialogOpen === ActionButtonEnum.Remove}
-        ticket_info={{ code: ticket.code, name: ticket.name }}
+        ticket_info={{ code: ticketInfo.code, name: ticketInfo.name }}
         onRemove={remove_ticket_action}
         onCancel={() => setDialogOpen(null)}
       />

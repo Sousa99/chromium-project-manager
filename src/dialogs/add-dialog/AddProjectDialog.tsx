@@ -27,7 +27,7 @@ import {
 
 interface IProps {
   open: boolean;
-  onSave: (project_info: Omit<IProject, "id">) => void;
+  onSave: (project_info: Omit<IProject, "id" | "tickets">) => void;
   onCancel: () => void;
 }
 
@@ -61,7 +61,6 @@ export const AddProjectDialog = (props: IProps) => {
       code: projectCode,
       name: projectName,
       hidden: projectHidden,
-      tickets: [],
       modes: {
         feature_branch: DEFAULT_FEATURE_BRANCH_MODE,
         pull_request: DEFAULT_PULL_REQUEST_MODE,

@@ -24,8 +24,8 @@ import { IProjectModes } from "@models/project/IProjectModes";
 
 interface IProps {
   open: boolean;
-  curr_project_info: IProject;
-  onSave: (project_info: IProject) => void;
+  curr_project_info: Omit<IProject, "tickets">;
+  onSave: (project_info: Omit<IProject, "tickets">) => void;
   onCancel: () => void;
 }
 
@@ -73,7 +73,6 @@ export const EditProjectDialog = (props: IProps) => {
       code: projectCode,
       name: projectName,
       hidden: projectHidden,
-      tickets: curr_project_info.tickets,
       modes: projectModesConfiguration,
     });
   };
