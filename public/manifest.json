@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "short_name": "Chromium Project Manager",
   "name": "Chromium Project and Ticket Manager",
-  "description": "The Chromium Project Manager is a versatile extension designed to streamline project management by providing quick access to tickets and relevant links.",
+  "description": "Streamline project management with quick access to tickets, links, and customizable clipboard codes. Enhance productivity effortlessly.",
   "version": "0.0.0",
 
   "permissions": ["activeTab", "storage"],
