@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "short_name": "Chromium Project Manager",
   "name": "Chromium Project and Ticket Manager",
-  "description": "A chromium extension to track project and tickets for work",
-  "version": "0.1.1",
+  "description": "The Chromium Project Manager is a versatile extension designed to streamline project management by providing quick access to tickets and relevant links.",
+  "version": "0.0.0",
 
   "permissions": ["activeTab", "storage"],
   "action": {

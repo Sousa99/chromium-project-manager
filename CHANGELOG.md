@@ -1,12 +1,11 @@
 ## [1.2.1](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.0...v1.2.1) (2024-06-07)
 
-
 ### Bug Fixes
 
-* better segmenation of data into various contexts ([8ecfbae](https://github.com/Sousa99/chromium-project-manager/commit/8ecfbaeea87d61c0ea8caa1dc55160cd5d8a1a65))
-* on changing ticket and links update currently shown in collapsible ([4f56f23](https://github.com/Sousa99/chromium-project-manager/commit/4f56f2372039d3410a7713ecacd2e2de94f1a6bc))
-* project id used as key and not code ([e2cab9b](https://github.com/Sousa99/chromium-project-manager/commit/e2cab9bc01f0c63429529be53d6f8482bf9ea04a))
-* rely on addEndListener to cleanup children ([edfaf88](https://github.com/Sousa99/chromium-project-manager/commit/edfaf88ee642d59339aa541c6f98d0f829890671))
+- better segmenation of data into various contexts ([8ecfbae](https://github.com/Sousa99/chromium-project-manager/commit/8ecfbaeea87d61c0ea8caa1dc55160cd5d8a1a65))
+- on changing ticket and links update currently shown in collapsible ([4f56f23](https://github.com/Sousa99/chromium-project-manager/commit/4f56f2372039d3410a7713ecacd2e2de94f1a6bc))
+- project id used as key and not code ([e2cab9b](https://github.com/Sousa99/chromium-project-manager/commit/e2cab9bc01f0c63429529be53d6f8482bf9ea04a))
+- rely on addEndListener to cleanup children ([edfaf88](https://github.com/Sousa99/chromium-project-manager/commit/edfaf88ee642d59339aa541c6f98d0f829890671))
 
 # [1.2.0](https://github.com/Sousa99/chromium-project-manager/compare/v1.1.0...v1.2.0) (2024-06-03)
 
