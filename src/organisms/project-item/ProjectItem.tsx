@@ -11,43 +11,61 @@ import {
   ActionButtonEnum,
   ActionButtons,
 } from "@molecules/action-buttons/ActionButtons";
-import { DataContext } from "@contexts/DataContext";
 import { RemoveProjectDialog } from "@dialogs/remove-dialog/RemoveProjectDialog";
 import { NotificationContext } from "@contexts/NotificationContext";
 import { ITicket } from "@models/ticket/ITicket";
 import { AddTicketDialog } from "@dialogs/add-dialog/AddTicketDialog";
 import { EditProjectDialog } from "@dialogs/edit-dialog/EditProjectDialog";
+import { ProjectContext } from "@contexts/data/ProjectContext";
+import { TicketContext } from "@contexts/data/TicketContext";
+import { FilterContext } from "@contexts/FilterContext";
 
 interface IProps {
-  project: IProject;
+  project: string;
 }
 
 export const ProjectItem = (props: IProps): JSX.Element => {
-  const { project } = props;
+  const { project: project_id } = props;
 
   const [dialogOpen, setDialogOpen] = React.useState<ActionButtonEnum | null>(
     null,
   );
 
-  const { addTicket, editProject, removeProject } =
-    React.useContext(DataContext);
+  const { getProject, editProject, removeProject, getProjectTickets } =
+    React.useContext(ProjectContext);
+  const { addTicket } = React.useContext(TicketContext);
+  const { filter } = React.useContext(FilterContext);
   const { selection, toggleProject } = React.useContext(SelectionContext);
   const { setNotification } = React.useContext(NotificationContext);
 
-  const childrenGenerator: () => JSX.Element = () => (
-    <div className="children-box">
-      {project.tickets.map((ticket) => (
-        <TicketItem
-          key={ticket.id}
-          project_id={project.id}
-          project_main={project.main_project}
-          project_code={project.code}
-          project_modes={project.modes}
-          ticket={ticket}
-        />
-      ))}
-    </div>
+  const projectInfo = getProject(project_id);
+  const projectTickets = getProjectTickets(project_id, filter);
+
+  const childrenGenerator = React.useCallback(
+    () =>
+      projectInfo === null ? (
+        <></>
+      ) : (
+        <div className="children-box">
+          {projectTickets.map((ticket) => (
+            <TicketItem
+              key={ticket}
+              project_id={projectInfo.id}
+              project_main={projectInfo.main_project}
+              project_code={projectInfo.code}
+              project_modes={projectInfo.modes}
+              ticket={ticket}
+            />
+          ))}
+        </div>
+      ),
+    [projectInfo, projectTickets],
   );
+
+  // If project can't be found then render nothing
+  if (projectInfo === null) {
+    return <></>;
+  }
 
   const sub_buttons: JSX.Element[] = [
     <ActionButtons
@@ -65,34 +83,36 @@ export const ProjectItem = (props: IProps): JSX.Element => {
     />,
   ];
 
-  const add_ticket_action = (new_ticket_info: Omit<ITicket, "id">) => {
+  const add_ticket_action = (
+    new_ticket_info: Omit<ITicket, "id" | "links">,
+  ) => {
     setNotification("success", `Link added successfully!`);
-    addTicket(project.id, new_ticket_info);
+    addTicket(projectInfo.id, new_ticket_info);
     setDialogOpen(null);
   };
 
-  const edit_project_action = (new_project_info: IProject) => {
+  const edit_project_action = (new_project_info: Omit<IProject, "tickets">) => {
     setNotification("success", `Project changed successfully!`);
-    editProject(project.id, new_project_info);
+    editProject(projectInfo.id, new_project_info);
     setDialogOpen(null);
   };
 
   const remove_project_action = () => {
     setNotification("success", `Project removed successfully!`);
-    removeProject(project.id);
+    removeProject(projectInfo.id);
     setDialogOpen(null);
   };
 
   return (
     <>
       <LineItemCollapsable
-        title={project.code}
+        title={projectInfo.code}
         iconOpened={<FolderIconOff />}
         iconClosed={<FolderIcon />}
         sub_buttons={sub_buttons}
-        expanded={selection.project_id === project.id}
+        expanded={selection.project_id === projectInfo.id}
         children_generator={childrenGenerator}
-        button_function={() => toggleProject(project.id)}
+        button_function={() => toggleProject(projectInfo.id)}
       />
       <AddTicketDialog
         open={dialogOpen === ActionButtonEnum.Add}
@@ -101,13 +121,13 @@ export const ProjectItem = (props: IProps): JSX.Element => {
       />
       <EditProjectDialog
         open={dialogOpen === ActionButtonEnum.Edit}
-        curr_project_info={project}
+        curr_project_info={projectInfo}
         onSave={edit_project_action}
         onCancel={() => setDialogOpen(null)}
       />
       <RemoveProjectDialog
         open={dialogOpen === ActionButtonEnum.Remove}
-        project_info={{ name: project.name }}
+        project_info={{ name: projectInfo.name }}
         onRemove={remove_project_action}
         onCancel={() => setDialogOpen(null)}
       />

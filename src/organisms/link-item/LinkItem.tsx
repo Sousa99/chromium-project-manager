@@ -6,26 +6,31 @@ import {
   ActionButtonEnum,
   ActionButtons,
 } from "@molecules/action-buttons/ActionButtons";
-import { DataContext } from "@contexts/DataContext";
 import { NotificationContext } from "@contexts/NotificationContext";
 import { RemoveLinkDialog } from "@dialogs/remove-dialog/RemoveLinkDialog";
 import { EditLinkDialog } from "@dialogs/edit-dialog/EditLinkDialog";
+import { LinkContext } from "@contexts/data/LinkContext";
 
 interface IProps {
   project_id: string;
   ticket_id: string;
-  link: ITicketLink;
+  link: string;
 }
 
 export const LinkItem = (props: IProps): JSX.Element => {
-  const { project_id, ticket_id, link } = props;
+  const { project_id, ticket_id, link: link_id } = props;
 
   const [dialogOpen, setDialogOpen] = React.useState<ActionButtonEnum | null>(
     null,
   );
 
-  const { editLink, removeLink } = React.useContext(DataContext);
+  const { getLink, editLink, removeLink } = React.useContext(LinkContext);
   const { setNotification } = React.useContext(NotificationContext);
+
+  const linkInfo = getLink(project_id, ticket_id, link_id);
+  if (linkInfo === null) {
+    return <></>;
+  }
 
   const sub_buttons: JSX.Element[] = [
     <ActionButtons
@@ -39,32 +44,32 @@ export const LinkItem = (props: IProps): JSX.Element => {
 
   const edit_link_action = (new_link_info: ITicketLink) => {
     setNotification("success", `Link changed successfully!`);
-    editLink(project_id, ticket_id, link.url, new_link_info);
+    editLink(project_id, ticket_id, linkInfo.url, new_link_info);
     setDialogOpen(null);
   };
 
   const remove_link_action = () => {
     setNotification("success", `Link removed successfully!`);
-    removeLink(project_id, ticket_id, link.url);
+    removeLink(project_id, ticket_id, linkInfo.url);
     setDialogOpen(null);
   };
 
   return (
     <>
       <LineItemUrl
-        title={link.tooltip}
-        url={link.url}
+        title={linkInfo.tooltip}
+        url={linkInfo.url}
         sub_buttons={sub_buttons}
       />
       <EditLinkDialog
         open={dialogOpen === ActionButtonEnum.Edit}
-        curr_link_info={{ tooltip: link.tooltip, url: link.url }}
+        curr_link_info={{ tooltip: linkInfo.tooltip, url: linkInfo.url }}
         onSave={edit_link_action}
         onCancel={() => setDialogOpen(null)}
       />
       <RemoveLinkDialog
         open={dialogOpen === ActionButtonEnum.Remove}
-        link_info={{ tooltip: link.tooltip, url: link.url }}
+        link_info={{ tooltip: linkInfo.tooltip, url: linkInfo.url }}
         onRemove={remove_link_action}
         onCancel={() => setDialogOpen(null)}
       />

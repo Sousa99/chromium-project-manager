@@ -3,7 +3,8 @@ import * as React from "react";
 import "./ProjectExplorer.scss";
 
 import { ProjectItem } from "@organisms/project-item/ProjectItem";
-import { DataContext } from "@contexts/DataContext";
+import { DataContext } from "@contexts/data/DataContext";
+import { ProjectContext } from "@contexts/data/ProjectContext";
 import { FilterContext } from "@contexts/FilterContext";
 import {
   ProjectButtonEnum,
@@ -23,12 +24,13 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
     ProjectButtonEnum.Download
   > | null>(null);
 
-  const { getData, downloadData, uploadData, addProject } =
+  const { getProjects, downloadData, uploadData } =
     React.useContext(DataContext);
+  const { addProject } = React.useContext(ProjectContext);
   const { filter } = React.useContext(FilterContext);
   const { setNotification } = React.useContext(NotificationContext);
 
-  const projects = getData(filter);
+  const projects = getProjects(filter);
 
   const onClickProjectButtons = (project_button: ProjectButtonEnum | null) => {
     if (project_button !== ProjectButtonEnum.Download) {
@@ -45,7 +47,9 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
     setDialogOpen(null);
   };
 
-  const add_project_action = (new_project_info: Omit<IProject, "id">) => {
+  const add_project_action = (
+    new_project_info: Omit<IProject, "id" | "tickets">,
+  ) => {
     setNotification("success", `Project added successfully!`);
     addProject(new_project_info);
     setDialogOpen(null);
@@ -60,7 +64,7 @@ export const ProjectExplorer = (props: IProps): JSX.Element => {
     <>
       <article className="project-explorer-component">
         {projects.map((project) => (
-          <ProjectItem key={project.code} project={project} />
+          <ProjectItem key={project} project={project} />
         ))}
         <ProjectButtons onClick={onClickProjectButtons} />
       </article>

@@ -29,28 +29,21 @@ export const LineItemCollapsable = (props: IProps): JSX.Element => {
 
   const [children, setChildren] = React.useState<JSX.Element | null>(null);
   const [expanded, setExpanded] = React.useState<boolean>(false);
-  const [ongoingTimeout, setOngoingTimeout] =
-    React.useState<NodeJS.Timeout | null>();
-  React.useEffect(() => {
-    if (triggerExpand && !expanded) {
-      if (ongoingTimeout) {
-        clearTimeout(ongoingTimeout);
-        setOngoingTimeout(null);
-      }
 
+  React.useEffect(() => {
+    if (triggerExpand) {
       setChildren(children_generator());
       setExpanded(true);
-    } else if (!triggerExpand && expanded) {
-      if (ongoingTimeout) {
-        clearTimeout(ongoingTimeout);
-        setOngoingTimeout(null);
-      }
-
-      let timeout = setTimeout(() => setChildren(null), 10000);
-      setOngoingTimeout(timeout);
+    } else {
       setExpanded(false);
     }
-  }, [triggerExpand, expanded, children_generator, ongoingTimeout]);
+  }, [triggerExpand, children_generator]);
+
+  const onAnimationEnd = () => {
+    if (!expanded) {
+      setChildren(null);
+    }
+  };
 
   const gradientStyle = {
     background: `linear-gradient(to right, rgba(216, 202, 85, 0.15), transparent 100%)`,
@@ -65,7 +58,9 @@ export const LineItemCollapsable = (props: IProps): JSX.Element => {
         button_styling={expanded ? gradientStyle : {}}
         button_function={button_function}
       />
-      <Collapse in={expanded}>{children}</Collapse>
+      <Collapse in={expanded} addEndListener={onAnimationEnd}>
+        {children}
+      </Collapse>
     </section>
   );
 };

@@ -23,7 +23,7 @@ import { ITicketType } from "@models/ticket/ITicketType";
 
 interface IProps {
   open: boolean;
-  onSave: (ticket_info: Omit<ITicket, "id">) => void;
+  onSave: (ticket_info: Omit<ITicket, "id" | "links">) => void;
   onCancel: () => void;
 }
 
@@ -76,7 +76,6 @@ export const AddTicketDialog = (props: IProps) => {
       name: ticketName as string,
       url: ticketUrl as string,
       hidden: ticketHidden as boolean,
-      links: [],
     });
   };
 
