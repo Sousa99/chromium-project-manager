@@ -45,7 +45,7 @@ const TicketContextProvider = ({ children }: { children: React.ReactNode }) => {
   const getTicket = (project_id: string, ticket_id: string): ITicket => {
     let [project_index] = getProjectIndex(data, project_id);
     let [ticket_index] = getTicketIndex(data, project_index, ticket_id);
-    return data[project_index].tickets[ticket_index];
+    return data[project_index].tickets[ticket_index] || null;
   };
 
   const addTicket = (
@@ -107,6 +107,9 @@ const TicketContextProvider = ({ children }: { children: React.ReactNode }) => {
       let [project_index] = getProjectIndex(data, project_id);
       let [, ticket] = getTicketIndex(data, project_index, ticket_id);
 
+      if (!ticket) {
+        return [];
+      }
       return ticket.links.map((link) => link.id);
     },
     [data],

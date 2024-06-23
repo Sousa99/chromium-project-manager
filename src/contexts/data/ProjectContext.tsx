@@ -37,7 +37,7 @@ const ProjectContextProvider = ({
 
   const getProject = (project_id: string): IProject => {
     let [project_index] = getProjectIndex(data, project_id);
-    return data[project_index];
+    return data[project_index] || null;
   };
 
   const addProject = (new_project_info: Omit<IProject, "id" | "tickets">) => {
@@ -97,6 +97,9 @@ const ProjectContextProvider = ({
     (project_id: string, filter: Filter) => {
       let [, project] = getProjectIndex(data, project_id);
 
+      if (!project) {
+        return [];
+      }
       return project.tickets
         .filter((ticket) => filter_hidden(filter, ticket.hidden))
         .filter((ticket) => filter_search(filter, [ticket.code, ticket.name]))

@@ -39,28 +39,28 @@ export const ProjectItem = (props: IProps): JSX.Element => {
   const { setNotification } = React.useContext(NotificationContext);
 
   const projectInfo = getProject(project_id);
-  const projectTickets = getProjectTickets(project_id, filter);
 
-  const childrenGenerator = React.useCallback(
-    () =>
-      projectInfo === null ? (
-        <></>
-      ) : (
-        <div className="children-box">
-          {projectTickets.map((ticket) => (
-            <TicketItem
-              key={ticket}
-              project_id={projectInfo.id}
-              project_main={projectInfo.main_project}
-              project_code={projectInfo.code}
-              project_modes={projectInfo.modes}
-              ticket={ticket}
-            />
-          ))}
-        </div>
-      ),
-    [projectInfo, projectTickets],
-  );
+  const childrenGenerator = React.useCallback(() => {
+    if (projectInfo === null) {
+      return <></>;
+    }
+
+    const projectTickets = getProjectTickets(project_id, filter);
+    return (
+      <div className="children-box">
+        {projectTickets.map((ticket) => (
+          <TicketItem
+            key={ticket}
+            project_id={projectInfo.id}
+            project_main={projectInfo.main_project}
+            project_code={projectInfo.code}
+            project_modes={projectInfo.modes}
+            ticket={ticket}
+          />
+        ))}
+      </div>
+    );
+  }, [project_id, filter, getProjectTickets, projectInfo]);
 
   // If project can't be found then render nothing
   if (projectInfo === null) {

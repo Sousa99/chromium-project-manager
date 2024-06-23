@@ -50,7 +50,7 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
     let [project_index] = getProjectIndex(data, project_id);
     let [ticket_index] = getTicketIndex(data, project_index, ticket_id);
     let [link_index] = getLinkIndex(data, project_index, ticket_index, link_id);
-    return data[project_index].tickets[ticket_index].links[link_index];
+    return data[project_index].tickets[ticket_index].links[link_index] || null;
   };
 
   const addLink = (
