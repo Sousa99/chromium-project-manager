@@ -1,3 +1,11 @@
+## [1.2.5](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.4...v1.2.5) (2024-06-23)
+
+
+### Bug Fixes
+
+* identify links through uuids ([de46311](https://github.com/Sousa99/chromium-project-manager/commit/de463116b14926aa2aa34077be1012a3e37e1e1c))
+* prevent app failure when removing elements ([c6274be](https://github.com/Sousa99/chromium-project-manager/commit/c6274be049214c012592632de37f0b278505494a))
+
 ## [1.2.4](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.3...v1.2.4) (2024-06-07)
 
 
