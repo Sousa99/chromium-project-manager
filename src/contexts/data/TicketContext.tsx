@@ -107,7 +107,7 @@ const TicketContextProvider = ({ children }: { children: React.ReactNode }) => {
       let [project_index] = getProjectIndex(data, project_id);
       let [, ticket] = getTicketIndex(data, project_index, ticket_id);
 
-      return ticket.links.map((link) => link.url);
+      return ticket.links.map((link) => link.id);
     },
     [data],
   );

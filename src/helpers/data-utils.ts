@@ -28,11 +28,11 @@ export const getLinkIndex = (
   data: IProjects,
   project_index: number,
   ticket_index: number,
-  link_url: string,
+  link_id: string,
 ): [number, ITicketLink] => {
   let project_tickets = data[project_index].tickets;
   let ticket_links = project_tickets[ticket_index].links;
 
-  let link_index = ticket_links.findIndex((link) => link.url === link_url);
+  let link_index = ticket_links.findIndex((link) => link.id === link_id);
   return [link_index, ticket_links[link_index]];
 };

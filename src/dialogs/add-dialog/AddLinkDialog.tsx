@@ -15,7 +15,7 @@ import { ITicketLink } from "@models/ticket/ITicketLink";
 
 interface IProps {
   open: boolean;
-  onSave: (link_info: ITicketLink) => void;
+  onSave: (link_info: Omit<ITicketLink, "id">) => void;
   onCancel: () => void;
 }
 

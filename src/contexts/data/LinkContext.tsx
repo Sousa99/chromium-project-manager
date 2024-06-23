@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { IProjects } from "@models/data/IData";
 import { ITicketLink } from "@models/ticket/ITicketLink";
@@ -15,20 +16,20 @@ interface ILinkContext {
   getLink: (
     project_id: string,
     ticket_id: string,
-    link_url: string,
+    link_id: string,
   ) => ITicketLink | null;
   addLink: (
     project_id: string,
     ticket_id: string,
-    new_link_info: ITicketLink,
+    new_link_info: Omit<ITicketLink, "id">,
   ) => void;
   editLink: (
     project_id: string,
     ticket_id: string,
-    prev_link_url: string,
+    prev_link_id: string,
     new_link_info: ITicketLink,
   ) => void;
-  removeLink: (project_id: string, ticket_id: string, link_url: string) => void;
+  removeLink: (project_id: string, ticket_id: string, link_id: string) => void;
 }
 
 export const LinkContext = React.createContext<ILinkContext>({
@@ -44,23 +45,18 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
   const getLink = (
     project_id: string,
     ticket_id: string,
-    link_url: string,
+    link_id: string,
   ): ITicketLink => {
     let [project_index] = getProjectIndex(data, project_id);
     let [ticket_index] = getTicketIndex(data, project_index, ticket_id);
-    let [link_index] = getLinkIndex(
-      data,
-      project_index,
-      ticket_index,
-      link_url,
-    );
+    let [link_index] = getLinkIndex(data, project_index, ticket_index, link_id);
     return data[project_index].tickets[ticket_index].links[link_index];
   };
 
   const addLink = (
     project_id: string,
     ticket_id: string,
-    new_link_info: ITicketLink,
+    new_link_info: Omit<ITicketLink, "id">,
   ) => {
     setData((data) => {
       let new_data: IProjects = deepcopy(data);
@@ -68,7 +64,9 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
       let [project_index] = getProjectIndex(new_data, project_id);
       let [, ticket] = getTicketIndex(new_data, project_index, ticket_id);
 
-      ticket.links.push(new_link_info);
+      let new_link: ITicketLink = { id: uuidv4(), ...new_link_info };
+      ticket.links = [...ticket.links, new_link];
+
       return new_data;
     });
   };
@@ -76,7 +74,7 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
   const editLink = (
     project_id: string,
     ticket_id: string,
-    prev_link_url: string,
+    prev_link_id: string,
     new_link_info: ITicketLink,
   ) => {
     setData((data) => {
@@ -92,7 +90,7 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
         new_data,
         project_index,
         ticket_index,
-        prev_link_url,
+        prev_link_id,
       );
 
       ticket.links[link_index] = new_link_info;
@@ -103,7 +101,7 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
   const removeLink = (
     project_id: string,
     ticket_id: string,
-    link_url: string,
+    link_id: string,
   ) => {
     setData((data) => {
       let new_data: IProjects = deepcopy(data);
@@ -118,7 +116,7 @@ const LinkContextProvider = ({ children }: { children: React.ReactNode }) => {
         new_data,
         project_index,
         ticket_index,
-        link_url,
+        link_id,
       );
 
       ticket.links.splice(link_index, 1);

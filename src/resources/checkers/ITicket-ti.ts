@@ -10,11 +10,12 @@ export const ITicketData = t.iface([], {
   name: "string",
   url: t.opt("string"),
   hidden: "boolean",
-  links: t.array("ITicketLink"),
+  links: t.array("ITicketLinkData"),
 });
 
 export const ITicket = t.iface(["ITicketData"], {
   id: "string",
+  links: t.array("ITicketLink"),
 });
 
 const exportedTypeSuite: t.ITypeSuite = {

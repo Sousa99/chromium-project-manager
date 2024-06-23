@@ -117,7 +117,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
     />,
   );
 
-  const add_link_action = (new_link_info: ITicketLink) => {
+  const add_link_action = (new_link_info: Omit<ITicketLink, "id">) => {
     setNotification("success", `Link added successfully!`);
     addLink(project_id, ticketInfo.id, new_link_info);
     setDialogOpen(null);

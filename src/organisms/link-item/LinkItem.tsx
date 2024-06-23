@@ -44,13 +44,13 @@ export const LinkItem = (props: IProps): JSX.Element => {
 
   const edit_link_action = (new_link_info: ITicketLink) => {
     setNotification("success", `Link changed successfully!`);
-    editLink(project_id, ticket_id, linkInfo.url, new_link_info);
+    editLink(project_id, ticket_id, linkInfo.id, new_link_info);
     setDialogOpen(null);
   };
 
   const remove_link_action = () => {
     setNotification("success", `Link removed successfully!`);
-    removeLink(project_id, ticket_id, linkInfo.url);
+    removeLink(project_id, ticket_id, linkInfo.id);
     setDialogOpen(null);
   };
 
@@ -63,7 +63,7 @@ export const LinkItem = (props: IProps): JSX.Element => {
       />
       <EditLinkDialog
         open={dialogOpen === ActionButtonEnum.Edit}
-        curr_link_info={{ tooltip: linkInfo.tooltip, url: linkInfo.url }}
+        curr_link_info={linkInfo}
         onSave={edit_link_action}
         onCancel={() => setDialogOpen(null)}
       />
