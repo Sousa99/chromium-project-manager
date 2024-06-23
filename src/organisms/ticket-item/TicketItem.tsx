@@ -80,7 +80,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
 
   const sub_buttons: JSX.Element[] = [];
 
-  if (ticketInfo.url !== undefined) {
+  if (ticketInfo.url !== undefined && ticketInfo.url !== "") {
     sub_buttons.push(
       <ActionButton
         key="action-info"
