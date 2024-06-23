@@ -7,10 +7,9 @@
 
 ## [1.2.3](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.2...v1.2.3) (2024-06-07)
 
-
 ### Bug Fixes
 
-* standardize manifest.json ([4e13644](https://github.com/Sousa99/chromium-project-manager/commit/4e13644b2a3abd647c89645d27b21030e236c3c6))
+- standardize manifest.json ([4e13644](https://github.com/Sousa99/chromium-project-manager/commit/4e13644b2a3abd647c89645d27b21030e236c3c6))
 
 ## [1.2.2](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.1...v1.2.2) (2024-06-07)
 

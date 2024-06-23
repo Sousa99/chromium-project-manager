@@ -53,26 +53,26 @@ export const TicketItem = (props: IProps): JSX.Element => {
   const { setNotification } = React.useContext(NotificationContext);
 
   const ticketInfo = getTicket(project_id, ticket_id);
-  const ticketLinks = getTicketLinks(project_id, ticket_id, filter);
 
-  const childrenGenerator = React.useCallback(
-    () =>
-      ticketInfo === null ? (
-        <></>
-      ) : (
-        <div className="children-box">
-          {ticketLinks.map((link) => (
-            <LinkItem
-              key={link}
-              project_id={project_id}
-              ticket_id={ticketInfo.id}
-              link={link}
-            />
-          ))}
-        </div>
-      ),
-    [project_id, ticketInfo, ticketLinks],
-  );
+  const childrenGenerator = React.useCallback(() => {
+    if (ticketInfo === null) {
+      return <></>;
+    }
+
+    const ticketLinks = getTicketLinks(project_id, ticket_id, filter);
+    return (
+      <div className="children-box">
+        {ticketLinks.map((link) => (
+          <LinkItem
+            key={link}
+            project_id={project_id}
+            ticket_id={ticketInfo.id}
+            link={link}
+          />
+        ))}
+      </div>
+    );
+  }, [project_id, ticket_id, filter, getTicketLinks, ticketInfo]);
 
   if (ticketInfo === null) {
     return <></>;
@@ -117,7 +117,7 @@ export const TicketItem = (props: IProps): JSX.Element => {
     />,
   );
 
-  const add_link_action = (new_link_info: ITicketLink) => {
+  const add_link_action = (new_link_info: Omit<ITicketLink, "id">) => {
     setNotification("success", `Link added successfully!`);
     addLink(project_id, ticketInfo.id, new_link_info);
     setDialogOpen(null);

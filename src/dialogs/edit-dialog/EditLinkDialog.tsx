@@ -44,6 +44,7 @@ export const EditLinkDialog = (props: IProps) => {
 
     e.stopPropagation();
     onSave({
+      id: curr_link_info.id,
       tooltip: linkTooltip as string,
       url: linkUrl as string,
     });
