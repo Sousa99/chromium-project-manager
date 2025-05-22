@@ -1,9 +1,8 @@
 ## [1.2.6](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.5...v1.2.6) (2024-06-23)
 
-
 ### Bug Fixes
 
-* prevent showing ticket link when empty ([c1fe7c0](https://github.com/Sousa99/chromium-project-manager/commit/c1fe7c06122896419d4b2c97dc69ed805d99f3e6))
+- prevent showing ticket link when empty ([c1fe7c0](https://github.com/Sousa99/chromium-project-manager/commit/c1fe7c06122896419d4b2c97dc69ed805d99f3e6))
 
 ## [1.2.5](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.4...v1.2.5) (2024-06-23)
 

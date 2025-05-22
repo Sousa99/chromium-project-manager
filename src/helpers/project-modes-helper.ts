@@ -43,7 +43,7 @@ const RECOGNIZED_CODES: {
     value: (info: TicketInfo) =>
       info.name
         .toLowerCase()
-        .replaceAll(/[^a-zA-Z ]/g, " ")
+        .replaceAll(/[^a-zA-Z\d ]/g, " ")
         .replaceAll(/\s\s+/g, " ")
         .replaceAll(" ", "-"),
   },
