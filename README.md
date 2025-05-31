@@ -24,6 +24,7 @@
    - [Loading the Extension in Chromium Manually](#🔄-loading-the-extension-in-chromium-manually)
    - [Usage](#🌐-usage)
 4. [🤝 Contributing](#🤝-contributing)
+5. [🔐 Privacy Policy](#🔐-privacy-policy)
 
 ---
 
@@ -138,3 +139,10 @@ Feel free to explore and customize the extension to suit your workflow!
 If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Your contributions are highly appreciated!
 
 Happy coding! 🚀
+
+## 🔐 Privacy Policy
+
+Your privacy matters. This extension does not collect or transmit any personal data. All information is stored locally in your browser.
+
+You can read the full privacy policy here:  
+👉 [Privacy Policy](https://sousa99.github.io/chromium-project-manager/docs/privacy-policy.html)

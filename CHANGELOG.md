@@ -1,9 +1,8 @@
 ## [1.2.7](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.6...v1.2.7) (2025-05-22)
 
-
 ### Bug Fixes
 
-* regex for branch name includes numbers from ticket name ([cda0584](https://github.com/Sousa99/chromium-project-manager/commit/cda05844cd0325daf807669444625cb4174ca1d7))
+- regex for branch name includes numbers from ticket name ([cda0584](https://github.com/Sousa99/chromium-project-manager/commit/cda05844cd0325daf807669444625cb4174ca1d7))
 
 ## [1.2.6](https://github.com/Sousa99/chromium-project-manager/compare/v1.2.5...v1.2.6) (2024-06-23)
 
